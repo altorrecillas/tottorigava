@@ -1045,7 +1045,7 @@
     const btPrev = document.getElementById('lbPrev'), btNext = document.getElementById('lbNext');
 
     const txt = (el, sel) => { const n = el.querySelector(sel); return n ? n.textContent.trim() : ''; };
-    const items = [...document.querySelectorAll('.dish-card, .menu-card, .g-item, .strip-item')]
+    const items = [...document.querySelectorAll('.dish-card, .menu-card, .g-item, .strip-item, .about-img, .daily-img')]
       .filter(el => el.querySelector('img'))
       .map(el => ({
         el,
@@ -1117,7 +1117,7 @@
     document.getElementById('lbClose').addEventListener('click', cerrar);
     btPrev.addEventListener('click', () => mover(-1));
     btNext.addEventListener('click', () => mover(1));
-    lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-figure') || e.target.classList.contains('lb-media')) cerrar(); });
+    lb.addEventListener('click', e => { if (e.target === lb || e.target === img || e.target.classList.contains('lb-figure') || e.target.classList.contains('lb-media')) cerrar(); });
     document.addEventListener('keydown', e => {
       if (lb.hidden) return;
       if (e.key === 'Escape') cerrar();
