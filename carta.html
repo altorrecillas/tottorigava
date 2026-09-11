@@ -3,9 +3,27 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Carta — Tottori Gavà · Restaurant Japonès</title>
+<title>Carta — Tottori Gavà · Sushi, makis, nigiris y combinaciones</title>
+<meta name="description" content="Carta completa del restaurante japonés Tottori en Gavà: makis, futomakis, temakis, nigiris, gunkan, sashimi, chirashi, combinaciones y postres. Precios actualizados.">
+<link rel="canonical" href="https://tottorigava.es/carta.html">
+<meta name="theme-color" content="#0a0806">
+
+<meta property="og:type" content="website">
+<meta property="og:locale" content="es_ES">
+<meta property="og:site_name" content="Tottori Gavà">
+<meta property="og:url" content="https://tottorigava.es/carta.html">
+<meta property="og:title" content="La carta de Tottori Gavà">
+<meta property="og:description" content="Más de 100 platos japoneses: makis, nigiris, sashimi, uramakis y combinaciones para compartir.">
+<meta property="og:image" content="https://tottorigava.es/og-image.jpg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta name="twitter:card" content="summary_large_image">
+
+<link rel="icon" href="favicon.svg" type="image/svg+xml">
+<link rel="apple-touch-icon" href="apple-touch-icon.png">
 <link rel="preconnect" href="https://fonts.googleapis.com">
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;1,300;1,400&family=Noto+Serif+JP:wght@200&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
 
 <style>
   :root {
@@ -18,6 +36,10 @@
     --cream: #f0e8d8;
     --cream-dim: #a89878;
     --white: #faf6ef;
+    --sello: #b5342c;
+    --lamina: linear-gradient(135deg,#a8874d 0%,#e4c98a 30%,#c9a96e 48%,#f2e0b0 66%,#b8945a 100%);
+    --lamina-viva: linear-gradient(135deg,#bd9a5c 0%,#f0dca8 30%,#e4c98a 48%,#fdf0cc 66%,#c9a96e 100%);
+    --relieve: 0 1px 0 rgba(255,240,200,.34) inset;
   }
   *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
   html { scroll-behavior: smooth; }
@@ -71,10 +93,10 @@
   .nav-links a.active::after { transform: scaleX(1); }
   .nav-cta {
     font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-    color: var(--black); background: var(--gold); padding: 12px 24px;
-    text-decoration: none; transition: background .3s;
+    color: var(--black); background: var(--lamina); box-shadow: var(--relieve); padding: 12px 24px;
+    text-decoration: none; transition: background .3s, box-shadow .3s;
   }
-  .nav-cta:hover { background: var(--gold-light); }
+  .nav-cta:hover { background: var(--lamina-viva); }
 
   /* HAMBURGER */
   .hamburger {
@@ -111,7 +133,7 @@
   .mobile-menu .mobile-cta {
     margin-top: 32px; font-family: 'Montserrat', sans-serif;
     font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
-    color: var(--black); background: var(--gold);
+    color: var(--black); background: var(--lamina); box-shadow: var(--relieve);
     padding: 18px 48px; border-bottom: none; width: auto;
   }
 
@@ -201,23 +223,40 @@
 
   /* DISH CARD */
   .dish-card {
-    position: relative; background: var(--dark); overflow: hidden;
-    cursor: pointer; transition: transform .4s;
+    position: relative; background: var(--dark); overflow: hidden; cursor: pointer;
+    box-shadow: inset 0 0 0 1px rgba(201,169,110,.06);
+    transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s;
   }
-  .dish-card:hover { transform: translateY(-4px); }
+  .dish-card:hover {
+    transform: translateY(-6px); z-index: 2;
+    box-shadow: inset 0 0 0 1px rgba(201,169,110,.2), 0 26px 50px -24px rgba(0,0,0,1);
+  }
+
+  /* — Sello 特選: marca de especialidad de la casa. Hace eco del sello rojo
+       que llevan estampado las pizarras en las propias fotos del restaurante. — */
+  .dish-card.tokusen::before {
+    content: '特'; position: absolute; z-index: 3; top: 9px; right: 9px;
+    width: 34px; height: 34px; display: grid; place-items: center;
+    background: var(--sello); color: #fff5ee;
+    font-family: 'Noto Serif JP', serif; font-weight: 200; font-size: 17px;
+    -webkit-text-stroke: .4px #fff5ee;
+    box-shadow: inset 0 0 0 3px var(--sello), inset 0 0 0 4px rgba(255,245,238,.45),
+                0 4px 14px -4px rgba(0,0,0,.85);
+    pointer-events: none;
+  }
   .dish-card-img {
     aspect-ratio: 4/3; overflow: hidden; position: relative;
   }
   .dish-card-img img {
     width: 100%; height: 100%; object-fit: cover;
-    filter: brightness(.72) saturate(.82); transition: transform .6s, filter .5s;
+    filter: brightness(.96) saturate(1.1) contrast(1.04); transition: transform .6s, filter .5s;
   }
   .dish-card:hover .dish-card-img img {
-    transform: scale(1.06); filter: brightness(.9) saturate(1.05);
+    transform: scale(1.06); filter: brightness(1.03) saturate(1.18) contrast(1.04);
   }
   .dish-card-img::after {
     content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,8,6,.7) 0%, transparent 55%);
+    background: linear-gradient(to top, rgba(10,8,6,.8) 0%, rgba(28,20,10,.1) 46%, rgba(201,169,110,.05) 100%);
     pointer-events: none;
   }
   .dish-card-body { padding: 22px 24px 26px; }
@@ -294,12 +333,13 @@
   .pdf-btn {
     display: inline-flex; align-items: center; gap: 10px;
     font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
-    color: var(--black); background: var(--gold);
+    color: var(--black); background: var(--lamina);
     padding: 14px 28px; text-decoration: none;
-    transition: background .3s, transform .3s;
+    box-shadow: var(--relieve), 0 8px 22px -16px rgba(201,169,110,.8);
+    transition: background .3s, transform .3s, box-shadow .3s;
     margin-top: 24px;
   }
-  .pdf-btn:hover { background: var(--gold-light); transform: translateY(-2px); }
+  .pdf-btn:hover { background: var(--lamina-viva); transform: translateY(-2px); box-shadow: var(--relieve), 0 14px 30px -16px rgba(201,169,110,.9); }
   .pdf-btn svg { flex-shrink: 0; }
   .hero-actions { display: flex; align-items: center; gap: 24px; flex-wrap: wrap; margin-top: 32px; }
   .hero-actions .back-link { margin-top: 0 !important; }
@@ -341,14 +381,320 @@
     .divider-section { margin: 0 16px; }
     .dish-grid { grid-template-columns: 1fr; }
   }
+
+  /* ── BASE UI: selección, foco, scrollbar ── */
+  img { display: block; }
+  p { text-wrap: pretty; }
+  ::selection { background: var(--gold); color: var(--black); }
+  :focus-visible { outline: 2px solid var(--gold-light); outline-offset: 3px; }
+  html { scrollbar-color: #3a3126 var(--black); }
+  ::-webkit-scrollbar { width: 10px; height: 10px; }
+  ::-webkit-scrollbar-track { background: var(--black); }
+  ::-webkit-scrollbar-thumb { background: #3a3126; border: 2px solid var(--black); border-radius: 6px; }
+  ::-webkit-scrollbar-thumb:hover { background: var(--gold-muted); }
+
+  .skip-link {
+    position: fixed; left: 16px; top: -120px; z-index: 900;
+    background: var(--gold); color: var(--black);
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    padding: 14px 22px; text-decoration: none; transition: top .25s;
+  }
+  .skip-link:focus { top: 16px; }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      animation-duration: .01ms !important; animation-iteration-count: 1 !important;
+      transition-duration: .01ms !important;
+    }
+    .reveal { opacity: 1 !important; transform: none !important; }
+  }
+
+  /* ── BARRA DE PROGRESO DE LECTURA ── */
+  .scroll-progress {
+    position: fixed; top: 0; left: 0; height: 2px; width: 100%;
+    transform: scaleX(0); transform-origin: 0 50%;
+    background: linear-gradient(to right, var(--gold-muted), var(--gold-light));
+    z-index: 700; pointer-events: none;
+  }
+
+  /* ── ESTADO ABIERTO / CERRADO ── */
+  .open-status:empty { display: none; }
+  .open-status {
+    display: inline-flex; align-items: center; gap: 7px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 9px; letter-spacing: .22em; text-transform: uppercase;
+    padding: 5px 11px; border: 1px solid rgba(201,169,110,.28);
+    color: var(--cream-dim); white-space: nowrap; vertical-align: middle;
+  }
+  .open-status::before {
+    content: ''; width: 6px; height: 6px; border-radius: 50%;
+    background: var(--gold-muted); flex-shrink: 0;
+  }
+  .open-status.is-open { color: #9fd0a4; border-color: rgba(120,190,130,.3); }
+  .open-status.is-open::before { background: #6fbf7a; box-shadow: 0 0 0 3px rgba(111,191,122,.18); animation: pulseDot 2.4s ease-in-out infinite; }
+  .open-status.is-closed { color: #d9a0a0; border-color: rgba(200,120,120,.28); }
+  .open-status.is-closed::before { background: #c56d6d; }
+  @keyframes pulseDot { 0%,100%{box-shadow:0 0 0 3px rgba(111,191,122,.18)} 50%{box-shadow:0 0 0 6px rgba(111,191,122,0)} }
+
+  /* ── BARRA DE ACCIONES MÓVIL ── */
+  .mobile-actions { display: none; }
+  @media (max-width: 1024px) {
+    .mobile-actions {
+      display: grid; grid-template-columns: repeat(4, 1fr);
+      position: fixed; left: 0; right: 0; bottom: 0; top: auto; z-index: 480;
+      padding: 0;
+      background: rgba(10,8,6,.95); backdrop-filter: blur(18px);
+      border-top: 1px solid rgba(201,169,110,.18);
+      padding-bottom: env(safe-area-inset-bottom, 0px);
+    }
+    .mobile-actions a {
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 5px;
+      padding: 10px 4px 11px; text-decoration: none; min-height: 58px;
+      font-size: 8.5px; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--cream-dim); transition: color .25s, background .25s;
+      -webkit-tap-highlight-color: transparent;
+    }
+    .mobile-actions a + a { box-shadow: inset 1px 0 0 rgba(201,169,110,.1); }
+    .mobile-actions a svg { color: var(--gold); transition: transform .25s; }
+    .mobile-actions a:active { background: rgba(201,169,110,.12); color: var(--gold-light); }
+    .mobile-actions a:active svg { transform: scale(.88); }
+    .ma-wa svg { color: #6fbf7a; }
+    body { padding-bottom: calc(70px + env(safe-area-inset-bottom, 0px)); }
+    .mobile-menu { padding-bottom: 70px; }
+  }
+
+
+  /* ── BUSCADOR Y CATEGORÍAS DE LA CARTA ── */
+  .carta-toolbar {
+    position: sticky; top: var(--nav-h, 74px); z-index: 460;
+    background: rgba(10,8,6,.93); backdrop-filter: blur(16px);
+    border-top: 1px solid rgba(201,169,110,.12);
+    border-bottom: 1px solid rgba(201,169,110,.12);
+  }
+  .carta-toolbar-inner {
+    display: flex; align-items: center; gap: 22px;
+    padding: 12px 60px; max-width: 100%;
+  }
+  .carta-search {
+    display: flex; align-items: center; gap: 9px; flex-shrink: 0;
+    width: 290px; padding: 9px 12px;
+    border: 1px solid rgba(201,169,110,.22); background: rgba(201,169,110,.04);
+    transition: border-color .3s, background .3s;
+  }
+  .carta-search:focus-within { border-color: var(--gold); background: rgba(201,169,110,.08); }
+  .carta-search svg { color: var(--gold-muted); flex-shrink: 0; transition: color .3s; }
+  .carta-search:focus-within svg { color: var(--gold); }
+  .carta-search input {
+    flex: 1; min-width: 0; background: none; border: none; outline: none;
+    font-family: 'Montserrat', sans-serif; font-size: 11.5px; font-weight: 300;
+    color: var(--white); letter-spacing: .04em;
+  }
+  .carta-search input::placeholder { color: var(--gold-muted); }
+  .carta-search input::-webkit-search-cancel-button { display: none; }
+  .search-clear {
+    display: flex; align-items: center; justify-content: center;
+    background: none; border: none; padding: 3px; cursor: pointer;
+    color: var(--cream-dim); transition: color .25s;
+  }
+  .search-clear:hover { color: var(--gold-light); }
+
+  .carta-chips {
+    display: flex; gap: 6px; overflow-x: auto; overscroll-behavior-x: contain;
+    scrollbar-width: none; -ms-overflow-style: none;
+    -webkit-mask-image: linear-gradient(to right, transparent, #000 14px, #000 calc(100% - 26px), transparent);
+            mask-image: linear-gradient(to right, transparent, #000 14px, #000 calc(100% - 26px), transparent);
+    padding: 2px 20px 2px 14px;
+  }
+  .carta-chips::-webkit-scrollbar { display: none; }
+  .chip {
+    flex-shrink: 0; white-space: nowrap; text-decoration: none;
+    font-size: 9.5px; letter-spacing: .16em; text-transform: uppercase;
+    color: var(--cream-dim); padding: 9px 15px;
+    border: 1px solid rgba(201,169,110,.18);
+    transition: color .25s, border-color .25s, background .25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .chip:hover { color: var(--gold-light); border-color: rgba(201,169,110,.45); }
+  .chip.active { color: var(--black); background: var(--gold); border-color: var(--gold); }
+
+  .carta-count {
+    padding: 0 60px 11px;
+    font-size: 9.5px; letter-spacing: .22em; text-transform: uppercase; color: var(--gold-muted);
+  }
+  .carta-count strong { color: var(--gold-light); font-weight: 400; }
+
+  /* Sin resultados */
+  .no-results { padding: 110px 60px 130px; text-align: center; }
+  .no-results-kanji {
+    font-family: 'Noto Serif JP', serif; font-size: 90px; font-weight: 200; line-height: 1;
+    color: transparent; -webkit-text-stroke: 1px rgba(201,169,110,.2); margin-bottom: 26px; user-select: none;
+  }
+  .no-results p { font-size: 13.5px; color: var(--cream-dim); margin-bottom: 30px; }
+  .no-results em { font-style: normal; color: var(--gold-light); }
+  .btn-reset {
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--black); background: var(--lamina); border: none;
+    box-shadow: var(--relieve);
+    padding: 15px 32px; cursor: pointer; transition: background .3s, transform .3s;
+  }
+  .btn-reset:hover { background: var(--lamina-viva); transform: translateY(-2px); }
+
+  /* el ancla no queda debajo de la barra */
+  .carta-section { scroll-margin-top: calc(var(--nav-h, 74px) + 62px); }
+
+  /* ── VOLVER ARRIBA ── */
+  .to-top {
+    position: fixed; right: 24px; bottom: 24px; z-index: 470;
+    width: 46px; height: 46px; display: flex; align-items: center; justify-content: center;
+    background: rgba(10,8,6,.9); backdrop-filter: blur(10px);
+    border: 1px solid rgba(201,169,110,.28); color: var(--gold);
+    cursor: pointer; opacity: 0; pointer-events: none;
+    transition: opacity .3s, transform .3s, background .3s;
+    transform: translateY(10px);
+  }
+  .to-top.show { opacity: 1; pointer-events: auto; transform: translateY(0); }
+  .to-top:hover { background: var(--gold); color: var(--black); }
+
+  @media (max-width: 1024px) {
+    .carta-toolbar-inner { flex-direction: column; align-items: stretch; gap: 10px; padding: 10px 0 9px; }
+    .carta-search { width: auto; margin: 0 24px; }
+    .carta-chips { padding: 0 24px 2px; }
+    .carta-count { padding: 0 24px 10px; }
+    .no-results { padding: 80px 24px 100px; }
+    .to-top { right: 16px; bottom: calc(84px + env(safe-area-inset-bottom, 0px)); }
+  }
+  @media (max-width: 380px) {
+    .carta-search { margin: 0 16px; }
+    .carta-chips { padding: 0 16px 2px; }
+    .carta-count { padding: 0 16px 10px; }
+  }
+
+
+  /* ── VISOR DE FOTOS ── */
+  .lightbox[hidden] { display: none; }
+  .lightbox {
+    position: fixed; inset: 0; z-index: 950;
+    background: rgba(6,5,4,.96); backdrop-filter: blur(20px);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; transition: opacity .28s ease;
+    padding: 72px 24px 40px;
+  }
+  .lightbox.show { opacity: 1; }
+  .lb-figure {
+    display: flex; flex-direction: column; align-items: center;
+    max-width: 720px; width: 100%; margin: auto;
+  }
+  .lb-media {
+    width: 100%; display: flex; align-items: center; justify-content: center;
+    min-height: 0;
+  }
+  .lb-media img {
+    max-width: 100%; max-height: 62vh; width: auto; height: auto;
+    object-fit: contain; opacity: 0; transform: scale(.97);
+    transition: opacity .35s ease, transform .35s ease;
+  }
+  .lb-media img.ready { opacity: 1; transform: scale(1); }
+  .lb-cap { text-align: center; margin-top: 26px; width: 100%; }
+  .lb-num {
+    display: block; font-family: 'Montserrat', sans-serif; font-size: 26px; font-weight: 300;
+    color: transparent; -webkit-text-stroke: 1px var(--gold); letter-spacing: .06em; line-height: 1;
+    margin-bottom: 10px;
+  }
+  .lb-num:empty { display: none; }
+  .lb-name {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 5vw, 32px); font-weight: 400; color: var(--white); line-height: 1.15;
+  }
+  .lb-desc {
+    display: block; font-size: 11.5px; line-height: 1.7; color: var(--cream-dim);
+    margin-top: 10px; max-width: 460px; margin-left: auto; margin-right: auto;
+  }
+  .lb-desc:empty { display: none; }
+  .lb-price {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 24px; color: var(--gold-light); letter-spacing: .06em; margin-top: 14px;
+  }
+  .lb-price:empty { display: none; }
+
+  .lb-btn {
+    position: absolute; display: flex; align-items: center; justify-content: center;
+    width: 46px; height: 46px; background: rgba(201,169,110,.08);
+    border: 1px solid rgba(201,169,110,.22); color: var(--gold);
+    cursor: pointer; transition: background .25s, color .25s, border-color .25s;
+    -webkit-tap-highlight-color: transparent;
+  }
+  .lb-btn:hover { background: var(--gold); color: var(--black); border-color: var(--gold); }
+  .lb-close { top: 20px; right: 20px; }
+  .lb-prev  { left: 20px;  top: 50%; margin-top: -23px; }
+  .lb-next  { right: 20px; top: 50%; margin-top: -23px; }
+  .lb-counter {
+    position: absolute; top: 28px; left: 50%; transform: translateX(-50%);
+    font-size: 9.5px; letter-spacing: .28em; text-transform: uppercase; color: var(--gold-muted);
+  }
+  .lb-hint {
+    position: absolute; bottom: 18px; left: 50%; transform: translateX(-50%);
+    font-size: 8.5px; letter-spacing: .24em; text-transform: uppercase; color: rgba(122,98,64,.7);
+  }
+
+  /* la tarjeta ahora sí hace algo al pulsarla */
+  .dish-card, .menu-card, .g-item, .strip-item { -webkit-tap-highlight-color: transparent; }
+
+  @media (max-width: 1024px) {
+    .lightbox { padding: 64px 16px 34px; }
+    .lb-media img { max-height: 50vh; }
+    .lb-btn { width: 42px; height: 42px; }
+    .lb-close { top: 14px; right: 14px; }
+    .lb-prev { left: 10px; }
+    .lb-next { right: 10px; }
+    .lb-cap { margin-top: 20px; }
+    .lb-hint { display: none; }
+  }
+
+
+  /* ── Aparición suave de las fotos (solo si hay JS) ── */
+  .js-fade .dish-card-img img,
+  .js-fade .menu-card-img img,
+  .js-fade .g-item img,
+  .js-fade .strip-item img,
+  .js-fade .about-img img,
+  .js-fade .daily-img img { opacity: 0; }
+  .js-fade img.cargada { opacity: 1; }
+  .dish-card-img, .menu-card-img, .g-item, .strip-item, .about-img, .daily-img {
+    background: linear-gradient(135deg, #17140e 0%, #221d14 100%);
+  }
+
+  /* ── AFINADO MÓVIL ── */
+  @media (max-width: 640px) {
+    /* las fotos de plato son cuadradas en origen: en móvil se ven enteras */
+    .dish-card-img, .menu-card-img { aspect-ratio: 1 / 1; }
+    .dish-card-body { padding: 16px 16px 20px; }
+    .dish-num { font-size: 30px; }
+    .dish-name { font-size: 16px; }
+    .dish-price { font-size: 18px; }
+    .dish-desc { font-size: 10px; }
+  }
+
+  /* Texto solo para lectores de pantalla: el sello es un pseudoelemento y
+     no se anuncia solo, pero sí lleva información. */
+  .sr-solo {
+    position: absolute; width: 1px; height: 1px; padding: 0; margin: -1px;
+    overflow: hidden; clip-path: inset(50%); white-space: nowrap; border: 0;
+  }
 </style>
 </head>
 <body>
+
+<a href="#cat-entrantes" class="skip-link">Saltar al contenido</a>
+
+<div class="scroll-progress" aria-hidden="true"></div>
 
 <nav id="navbar">
   <a href="index.html" class="nav-logo"><span>TOTTORI</span>Restaurant Japonès</a>
   <ul class="nav-links">
     <li><a href="index.html#about">El Restaurante</a></li>
+    <li><a href="carta.html" class="active" aria-current="page">Carta</a></li>
     <li><a href="menu.html">Menú del Día</a></li>
     <li><a href="index.html#galeria">Galería</a></li>
     <li><a href="index.html#location">Ubicación</a></li>
@@ -360,8 +706,9 @@
 </nav>
 
 <div class="mobile-menu" id="mobileMenu">
-  <a href="index.html#about"   onclick="closeMobile()">El Restaurante</a>
-  <a href="menu.html"   onclick="closeMobile()">Menú del Día</a>
+  <a href="index.html#about" onclick="closeMobile()">El Restaurante</a>
+  <a href="carta.html" class="active" aria-current="page" onclick="closeMobile()">Carta</a>
+  <a href="menu.html" onclick="closeMobile()">Menú del Día</a>
   <a href="index.html#galeria" onclick="closeMobile()">Galería</a>
   <a href="index.html#location"onclick="closeMobile()">Ubicación</a>
   <a href="tel:936388770" class="mobile-cta">Reservar mesa</a>
@@ -374,6 +721,7 @@
     <div class="page-tag">Tottori Gavà · Gavà, Barcelona</div>
     <h1>Nuestra<br><em>carta</em></h1>
     <p>Cocina japonesa auténtica elaborada con ingredientes frescos y técnicas tradicionales.<br>Cada plato, una experiencia.</p>
+    <div style="margin-top:20px"><span class="open-status" data-open-status></span></div>
     <div class="hero-actions">
       <a href="index.html" class="back-link">
         <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M20 5H2M6 1L2 5L6 9" stroke="currentColor" stroke-width="1"/></svg>
@@ -389,8 +737,43 @@
   </div>
 </div>
 
+
+<!-- BUSCADOR + CATEGORÍAS -->
+<div class="carta-toolbar" id="cartaToolbar">
+  <div class="carta-toolbar-inner">
+    <div class="carta-search">
+      <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M20 20l-3.5-3.5"/></svg>
+      <input type="search" id="dishSearch" placeholder="Buscar plato, ingrediente o número…" aria-label="Buscar en la carta" autocomplete="off" enterkeyhint="search">
+      <button type="button" class="search-clear" id="searchClear" aria-label="Limpiar búsqueda" hidden>
+        <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+      </button>
+    </div>
+    <div class="carta-chips" id="cartaChips" aria-label="Categorías de la carta">
+      <a href="#cat-entrantes" class="chip" data-target="cat-entrantes">Entrantes</a>
+      <a href="#cat-makis" class="chip" data-target="cat-makis">Makis</a>
+      <a href="#cat-verde-makis" class="chip" data-target="cat-verde-makis">Verde Makis</a>
+      <a href="#cat-futomakis" class="chip" data-target="cat-futomakis">Futomakis</a>
+      <a href="#cat-temakis" class="chip" data-target="cat-temakis">Temakis</a>
+      <a href="#cat-especialidades-y-california" class="chip" data-target="cat-especialidades-y-california">Especialidades y California</a>
+      <a href="#cat-gunkan" class="chip" data-target="cat-gunkan">Gunkan</a>
+      <a href="#cat-nigiri" class="chip" data-target="cat-nigiri">Nigiri</a>
+      <a href="#cat-chirashi-tataki" class="chip" data-target="cat-chirashi-tataki">Chirashi Tataki</a>
+      <a href="#cat-sashimi" class="chip" data-target="cat-sashimi">Sashimi</a>
+      <a href="#cat-menus-sushi" class="chip" data-target="cat-menus-sushi">Menús Sushi</a>
+      <a href="#cat-postres" class="chip" data-target="cat-postres">Postres</a>
+    </div>
+  </div>
+  <div class="carta-count" id="cartaCount" role="status" aria-live="polite" hidden></div>
+</div>
+
+<div class="no-results" id="noResults" hidden>
+  <div class="no-results-kanji">空</div>
+  <p>No hemos encontrado ningún plato con <em id="noResultsTerm"></em>.</p>
+  <button type="button" class="btn-reset" id="resetSearch">Ver la carta completa</button>
+</div>
+
 <!-- ENTRANTES -->
-<section class="carta-section">
+<section class="carta-section" id="cat-entrantes">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -403,7 +786,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/901%20Edamame.avif" alt="Edamame" loading="lazy">
+        <img src="imgcarta/901%20Edamame.avif" alt="Edamame" loading="lazy" decoding="async" srcset="imgcarta/sm/901%20Edamame.avif 340w, imgcarta/901%20Edamame.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">901</div>
@@ -414,7 +797,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/902%20Ensalada%20wakame.avif" alt="Ensalada wakame" loading="lazy">
+        <img src="imgcarta/902%20Ensalada%20wakame.avif" alt="Ensalada wakame" loading="lazy" decoding="async" srcset="imgcarta/sm/902%20Ensalada%20wakame.avif 340w, imgcarta/902%20Ensalada%20wakame.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">902</div>
@@ -425,7 +808,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/903%20Ensalada%20tottori.avif" alt="Ensalada tottori" loading="lazy">
+        <img src="imgcarta/903%20Ensalada%20tottori.avif" alt="Ensalada tottori" loading="lazy" decoding="async" srcset="imgcarta/sm/903%20Ensalada%20tottori.avif 340w, imgcarta/903%20Ensalada%20tottori.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">903</div>
@@ -436,7 +819,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/904%20Sopa%20de%20miso.avif" alt="Sopa de miso" loading="lazy">
+        <img src="imgcarta/904%20Sopa%20de%20miso.avif" alt="Sopa de miso" loading="lazy" decoding="async" srcset="imgcarta/sm/904%20Sopa%20de%20miso.avif 340w, imgcarta/904%20Sopa%20de%20miso.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">904</div>
@@ -447,7 +830,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/905%20Yakisoba%20de%20verduras.avif" alt="Yakisoba de verduras" loading="lazy">
+        <img src="imgcarta/905%20Yakisoba%20de%20verduras.avif" alt="Yakisoba de verduras" loading="lazy" decoding="async" srcset="imgcarta/sm/905%20Yakisoba%20de%20verduras.avif 340w, imgcarta/905%20Yakisoba%20de%20verduras.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">905</div>
@@ -458,7 +841,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/913%20Yakisoba%20de%20pollo.avif" alt="Yakisoba de pollo" loading="lazy">
+        <img src="imgcarta/913%20Yakisoba%20de%20pollo.avif" alt="Yakisoba de pollo" loading="lazy" decoding="async" srcset="imgcarta/sm/913%20Yakisoba%20de%20pollo.avif 340w, imgcarta/913%20Yakisoba%20de%20pollo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">913</div>
@@ -469,7 +852,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/914%20Yakisoba%20con%20gambas.avif" alt="Yakisoba con gambas" loading="lazy">
+        <img src="imgcarta/914%20Yakisoba%20con%20gambas.avif" alt="Yakisoba con gambas" loading="lazy" decoding="async" srcset="imgcarta/sm/914%20Yakisoba%20con%20gambas.avif 340w, imgcarta/914%20Yakisoba%20con%20gambas.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">914</div>
@@ -480,7 +863,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/906%20Yakimeshi.avif" alt="Yakimeshi" loading="lazy">
+        <img src="imgcarta/906%20Yakimeshi.avif" alt="Yakimeshi" loading="lazy" decoding="async" srcset="imgcarta/sm/906%20Yakimeshi.avif 340w, imgcarta/906%20Yakimeshi.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">906</div>
@@ -491,7 +874,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/907%20Gyoza%20de%20carne.avif" alt="Gyoza de carne" loading="lazy">
+        <img src="imgcarta/907%20Gyoza%20de%20carne.avif" alt="Gyoza de carne" loading="lazy" decoding="async" srcset="imgcarta/sm/907%20Gyoza%20de%20carne.avif 340w, imgcarta/907%20Gyoza%20de%20carne.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">907</div>
@@ -502,7 +885,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/908%20Rollito%20de%20marisco.avif" alt="Rollito de marisco" loading="lazy">
+        <img src="imgcarta/908%20Rollito%20de%20marisco.avif" alt="Rollito de marisco" loading="lazy" decoding="async" srcset="imgcarta/sm/908%20Rollito%20de%20marisco.avif 340w, imgcarta/908%20Rollito%20de%20marisco.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">908</div>
@@ -513,7 +896,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/909%20Chicken%20teriyaki.avif" alt="Chicken teriyaki" loading="lazy">
+        <img src="imgcarta/909%20Chicken%20teriyaki.avif" alt="Chicken teriyaki" loading="lazy" decoding="async" srcset="imgcarta/sm/909%20Chicken%20teriyaki.avif 340w, imgcarta/909%20Chicken%20teriyaki.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">909</div>
@@ -524,7 +907,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/910%20Tempura%20batter%20mix.avif" alt="Tempura batter mix" loading="lazy">
+        <img src="imgcarta/910%20Tempura%20batter%20mix.avif" alt="Tempura batter mix" loading="lazy" decoding="async" srcset="imgcarta/sm/910%20Tempura%20batter%20mix.avif 340w, imgcarta/910%20Tempura%20batter%20mix.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">910</div>
@@ -536,7 +919,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/911%20Oyakodon.avif" alt="Oyakodon" loading="lazy">
+        <img src="imgcarta/911%20Oyakodon.avif" alt="Oyakodon" loading="lazy" decoding="async" srcset="imgcarta/sm/911%20Oyakodon.avif 340w, imgcarta/911%20Oyakodon.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">911</div>
@@ -548,7 +931,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/912%20Katsudon.avif" alt="Katsudon" loading="lazy">
+        <img src="imgcarta/912%20Katsudon.avif" alt="Katsudon" loading="lazy" decoding="async" srcset="imgcarta/sm/912%20Katsudon.avif 340w, imgcarta/912%20Katsudon.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">912</div>
@@ -560,7 +943,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/915%20Arroz%20blanco.avif" alt="Arroz blanco" loading="lazy">
+        <img src="imgcarta/915%20Arroz%20blanco.avif" alt="Arroz blanco" loading="lazy" decoding="async" srcset="imgcarta/sm/915%20Arroz%20blanco.avif 340w, imgcarta/915%20Arroz%20blanco.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">915</div>
@@ -571,7 +954,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/916%20Arroz%20con%20huevo.avif" alt="Arroz con huevo" loading="lazy">
+        <img src="imgcarta/916%20Arroz%20con%20huevo.avif" alt="Arroz con huevo" loading="lazy" decoding="async" srcset="imgcarta/sm/916%20Arroz%20con%20huevo.avif 340w, imgcarta/916%20Arroz%20con%20huevo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">916</div>
@@ -582,7 +965,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/917%20TAKOYAKI.avif" alt="Takoyaki" loading="lazy">
+        <img src="imgcarta/917%20TAKOYAKI.avif" alt="Takoyaki" loading="lazy" decoding="async" srcset="imgcarta/sm/917%20TAKOYAKI.avif 340w, imgcarta/917%20TAKOYAKI.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">917</div>
@@ -593,7 +976,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/920%20Ensalada%20de%20salm%C3%B3n.avif" alt="Ensalada de salmón" loading="lazy">
+        <img src="imgcarta/920%20Ensalada%20de%20salm%C3%B3n.avif" alt="Ensalada de salmón" loading="lazy" decoding="async" srcset="imgcarta/sm/920%20Ensalada%20de%20salm%C3%B3n.avif 340w, imgcarta/920%20Ensalada%20de%20salm%C3%B3n.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">920</div>
@@ -608,7 +991,7 @@
 <div class="divider-section"></div>
 
 <!-- MAKIS -->
-<section class="carta-section alt-bg">
+<section class="carta-section alt-bg" id="cat-makis">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -621,7 +1004,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/001%20Makis%20de%20salm%C3%B3n%206p.avif" alt="Makis de salmón 6p" loading="lazy">
+        <img src="imgcarta/001%20Makis%20de%20salm%C3%B3n%206p.avif" alt="Makis de salmón 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/001%20Makis%20de%20salm%C3%B3n%206p.avif 340w, imgcarta/001%20Makis%20de%20salm%C3%B3n%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">001</div>
@@ -633,7 +1016,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/002%20Makis%20de%20at%C3%BAn%206p.avif" alt="Makis de atún 6p" loading="lazy">
+        <img src="imgcarta/002%20Makis%20de%20at%C3%BAn%206p.avif" alt="Makis de atún 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/002%20Makis%20de%20at%C3%BAn%206p.avif 340w, imgcarta/002%20Makis%20de%20at%C3%BAn%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">002</div>
@@ -645,7 +1028,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/003%20Makis%20de%20anguila%206p.avif" alt="Makis de anguila 6p" loading="lazy">
+        <img src="imgcarta/003%20Makis%20de%20anguila%206p.avif" alt="Makis de anguila 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/003%20Makis%20de%20anguila%206p.avif 340w, imgcarta/003%20Makis%20de%20anguila%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">003</div>
@@ -657,7 +1040,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/004%20Makis%20de%20langostino%206p.avif" alt="Makis de langostino 6p" loading="lazy">
+        <img src="imgcarta/004%20Makis%20de%20langostino%206p.avif" alt="Makis de langostino 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/004%20Makis%20de%20langostino%206p.avif 340w, imgcarta/004%20Makis%20de%20langostino%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">004</div>
@@ -669,7 +1052,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/005%20Makis%20de%20aguacate%206p.avif" alt="Makis de aguacate 6p" loading="lazy">
+        <img src="imgcarta/005%20Makis%20de%20aguacate%206p.avif" alt="Makis de aguacate 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/005%20Makis%20de%20aguacate%206p.avif 340w, imgcarta/005%20Makis%20de%20aguacate%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">005</div>
@@ -681,7 +1064,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/006%20Makis%20de%20cangrejo%206p.avif" alt="Makis de cangrejo 6p" loading="lazy">
+        <img src="imgcarta/006%20Makis%20de%20cangrejo%206p.avif" alt="Makis de cangrejo 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/006%20Makis%20de%20cangrejo%206p.avif 340w, imgcarta/006%20Makis%20de%20cangrejo%206p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">006</div>
@@ -693,7 +1076,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/007%20Makis%20de%20tortilla%206p.avif" alt="Makis de tortilla 6p" loading="lazy">
+        <img src="imgcarta/007%20Makis%20de%20tortilla%206p.avif" alt="Makis de tortilla 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/007%20Makis%20de%20tortilla%206p.avif 340w, imgcarta/007%20Makis%20de%20tortilla%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">007</div>
@@ -705,7 +1088,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/008%20Makis%20de%20pepino%206p.avif" alt="Makis de pepino 6p" loading="lazy">
+        <img src="imgcarta/008%20Makis%20de%20pepino%206p.avif" alt="Makis de pepino 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/008%20Makis%20de%20pepino%206p.avif 340w, imgcarta/008%20Makis%20de%20pepino%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">008</div>
@@ -717,7 +1100,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/009%20Makis%20variado%206p.avif" alt="Makis variado 6p" loading="lazy">
+        <img src="imgcarta/009%20Makis%20variado%206p.avif" alt="Makis variado 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/009%20Makis%20variado%206p.avif 340w, imgcarta/009%20Makis%20variado%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">009</div>
@@ -729,7 +1112,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/009%20Makis%20variado%2012p.avif" alt="Makis variado 12p" loading="lazy">
+        <img src="imgcarta/009%20Makis%20variado%2012p.avif" alt="Makis variado 12p" loading="lazy" decoding="async" srcset="imgcarta/sm/009%20Makis%20variado%2012p.avif 340w, imgcarta/009%20Makis%20variado%2012p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">009</div>
@@ -741,7 +1124,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/010%20Makis%20pl%C3%A1tano.avif" alt="Makis plátano" loading="lazy">
+        <img src="imgcarta/010%20Makis%20pl%C3%A1tano.avif" alt="Makis plátano" loading="lazy" decoding="async" srcset="imgcarta/sm/010%20Makis%20pl%C3%A1tano.avif 340w, imgcarta/010%20Makis%20pl%C3%A1tano.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">010</div>
@@ -752,7 +1135,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/011%20Makis%20fresa.avif" alt="Makis fresa" loading="lazy">
+        <img src="imgcarta/011%20Makis%20fresa.avif" alt="Makis fresa" loading="lazy" decoding="async" srcset="imgcarta/sm/011%20Makis%20fresa.avif 340w, imgcarta/011%20Makis%20fresa.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">011</div>
@@ -763,7 +1146,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/013%20Makis%20foie%20fras.avif" alt="Makis foie fras" loading="lazy">
+        <img src="imgcarta/013%20Makis%20foie%20fras.avif" alt="Makis foie fras" loading="lazy" decoding="async" srcset="imgcarta/sm/013%20Makis%20foie%20fras.avif 340w, imgcarta/013%20Makis%20foie%20fras.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">013</div>
@@ -773,7 +1156,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/014%20Makis%20de%20pollo.avif" alt="Makis de pollo" loading="lazy">
+        <img src="imgcarta/014%20Makis%20de%20pollo.avif" alt="Makis de pollo" loading="lazy" decoding="async">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">014</div>
@@ -784,7 +1167,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/015%20Maki%20de%20Queso%206p.avif" alt="Maki de Queso 6p" loading="lazy">
+        <img src="imgcarta/015%20Maki%20de%20Queso%206p.avif" alt="Maki de Queso 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/015%20Maki%20de%20Queso%206p.avif 340w, imgcarta/015%20Maki%20de%20Queso%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">015</div>
@@ -800,7 +1183,7 @@
 <div class="divider-section"></div>
 
 <!-- VERDE MAKIS -->
-<section class="carta-section">
+<section class="carta-section" id="cat-verde-makis">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -813,7 +1196,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/101%20Verde%20maki%20de%20salm%C3%B3n%20y%20aguacate%206p.avif" alt="Verde maki de salmón y aguacate 6p" loading="lazy">
+        <img src="imgcarta/101%20Verde%20maki%20de%20salm%C3%B3n%20y%20aguacate%206p.avif" alt="Verde maki de salmón y aguacate 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/101%20Verde%20maki%20de%20salm%C3%B3n%20y%20aguacate%206p.avif 340w, imgcarta/101%20Verde%20maki%20de%20salm%C3%B3n%20y%20aguacate%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">101</div>
@@ -824,7 +1207,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/102%20Verde%20maki%20de%20at%C3%BAn%20y%20aguacate%206p.avif" alt="Verde maki de atún y aguacate 6p" loading="lazy">
+        <img src="imgcarta/102%20Verde%20maki%20de%20at%C3%BAn%20y%20aguacate%206p.avif" alt="Verde maki de atún y aguacate 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/102%20Verde%20maki%20de%20at%C3%BAn%20y%20aguacate%206p.avif 340w, imgcarta/102%20Verde%20maki%20de%20at%C3%BAn%20y%20aguacate%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">102</div>
@@ -835,7 +1218,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/103%20Verde%20maki%20de%20langostino%20y%20aguacate%206p.avif" alt="Verde maki de langostino y aguacate 6p" loading="lazy">
+        <img src="imgcarta/103%20Verde%20maki%20de%20langostino%20y%20aguacate%206p.avif" alt="Verde maki de langostino y aguacate 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/103%20Verde%20maki%20de%20langostino%20y%20aguacate%206p.avif 340w, imgcarta/103%20Verde%20maki%20de%20langostino%20y%20aguacate%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">103</div>
@@ -846,7 +1229,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/104%20Verde%20maki%20de%20cangrejo%20y%20aguacate%206p.avif" alt="Verde maki de cangrejo y aguacate 6p" loading="lazy">
+        <img src="imgcarta/104%20Verde%20maki%20de%20cangrejo%20y%20aguacate%206p.avif" alt="Verde maki de cangrejo y aguacate 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/104%20Verde%20maki%20de%20cangrejo%20y%20aguacate%206p.avif 340w, imgcarta/104%20Verde%20maki%20de%20cangrejo%20y%20aguacate%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">104</div>
@@ -861,7 +1244,7 @@
 <div class="divider-section"></div>
 
 <!-- FUTOMAKIS -->
-<section class="carta-section alt-bg">
+<section class="carta-section alt-bg" id="cat-futomakis">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -874,7 +1257,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/201%20Futomaki%20de%20cangrejo%2C%20aguacate%20y%20queso%208p.avif" alt="Futomaki de cangrejo, aguacate y queso 8p" loading="lazy">
+        <img src="imgcarta/201%20Futomaki%20de%20cangrejo%2C%20aguacate%20y%20queso%208p.avif" alt="Futomaki de cangrejo, aguacate y queso 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/201%20Futomaki%20de%20cangrejo%2C%20aguacate%20y%20queso%208p.avif 340w, imgcarta/201%20Futomaki%20de%20cangrejo%2C%20aguacate%20y%20queso%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">201</div>
@@ -885,7 +1268,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/202%20Futomaki%20de%20salm%C3%B3n%2C%20mango%20y%20langostino.avif" alt="Futomaki de salmón, mango y langostino" loading="lazy">
+        <img src="imgcarta/202%20Futomaki%20de%20salm%C3%B3n%2C%20mango%20y%20langostino.avif" alt="Futomaki de salmón, mango y langostino" loading="lazy" decoding="async" srcset="imgcarta/sm/202%20Futomaki%20de%20salm%C3%B3n%2C%20mango%20y%20langostino.avif 340w, imgcarta/202%20Futomaki%20de%20salm%C3%B3n%2C%20mango%20y%20langostino.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">202</div>
@@ -896,7 +1279,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/203%20Futomaki%20de%20salm%C3%B3n%20y%20aguacate%208p.avif" alt="Futomaki de salmón y aguacate 8p" loading="lazy">
+        <img src="imgcarta/203%20Futomaki%20de%20salm%C3%B3n%20y%20aguacate%208p.avif" alt="Futomaki de salmón y aguacate 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/203%20Futomaki%20de%20salm%C3%B3n%20y%20aguacate%208p.avif 340w, imgcarta/203%20Futomaki%20de%20salm%C3%B3n%20y%20aguacate%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">203</div>
@@ -907,7 +1290,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/204%20Futomaki%20de%20at%C3%BAn%20y%20aguacate%208p.avif" alt="Futomaki de atún y aguacate 8p" loading="lazy">
+        <img src="imgcarta/204%20Futomaki%20de%20at%C3%BAn%20y%20aguacate%208p.avif" alt="Futomaki de atún y aguacate 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/204%20Futomaki%20de%20at%C3%BAn%20y%20aguacate%208p.avif 340w, imgcarta/204%20Futomaki%20de%20at%C3%BAn%20y%20aguacate%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">204</div>
@@ -918,7 +1301,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/205%20Futomaki%20de%20tempura%20de%20gambas%208p.avif" alt="Futomaki de tempura de gambas 8p" loading="lazy">
+        <img src="imgcarta/205%20Futomaki%20de%20tempura%20de%20gambas%208p.avif" alt="Futomaki de tempura de gambas 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/205%20Futomaki%20de%20tempura%20de%20gambas%208p.avif 340w, imgcarta/205%20Futomaki%20de%20tempura%20de%20gambas%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">205</div>
@@ -929,7 +1312,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/206%20Futomaki%20de%20salm%C3%B3n%2C%20queso%20y%20mango%208p.avif" alt="Futomaki de salmón, queso y mango 8p" loading="lazy">
+        <img src="imgcarta/206%20Futomaki%20de%20salm%C3%B3n%2C%20queso%20y%20mango%208p.avif" alt="Futomaki de salmón, queso y mango 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/206%20Futomaki%20de%20salm%C3%B3n%2C%20queso%20y%20mango%208p.avif 340w, imgcarta/206%20Futomaki%20de%20salm%C3%B3n%2C%20queso%20y%20mango%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">206</div>
@@ -940,7 +1323,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/207%20Futomaki%20de%20pollo%20crujiente%208p.avif" alt="Futomaki de pollo crujiente 8p" loading="lazy">
+        <img src="imgcarta/207%20Futomaki%20de%20pollo%20crujiente%208p.avif" alt="Futomaki de pollo crujiente 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/207%20Futomaki%20de%20pollo%20crujiente%208p.avif 340w, imgcarta/207%20Futomaki%20de%20pollo%20crujiente%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">207</div>
@@ -951,7 +1334,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/208%20Futomaki%20de%20Cangrejo%208p.avif" alt="Futomaki de Cangrejo 8p" loading="lazy">
+        <img src="imgcarta/208%20Futomaki%20de%20Cangrejo%208p.avif" alt="Futomaki de Cangrejo 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/208%20Futomaki%20de%20Cangrejo%208p.avif 340w, imgcarta/208%20Futomaki%20de%20Cangrejo%208p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">208</div>
@@ -967,7 +1350,7 @@
 <div class="divider-section"></div>
 
 <!-- TEMAKIS -->
-<section class="carta-section">
+<section class="carta-section" id="cat-temakis">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -980,7 +1363,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/301%20Temaki%20de%20salm%C3%B3n%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de salmón, aguacate y sésamo" loading="lazy">
+        <img src="imgcarta/301%20Temaki%20de%20salm%C3%B3n%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de salmón, aguacate y sésamo" loading="lazy" decoding="async" srcset="imgcarta/sm/301%20Temaki%20de%20salm%C3%B3n%2C%20aguacate%20y%20s%C3%A9samo.avif 340w, imgcarta/301%20Temaki%20de%20salm%C3%B3n%2C%20aguacate%20y%20s%C3%A9samo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">301</div>
@@ -991,7 +1374,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/302%20Temaki%20de%20at%C3%BAn%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de atún, aguacate y sésamo" loading="lazy">
+        <img src="imgcarta/302%20Temaki%20de%20at%C3%BAn%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de atún, aguacate y sésamo" loading="lazy" decoding="async" srcset="imgcarta/sm/302%20Temaki%20de%20at%C3%BAn%2C%20aguacate%20y%20s%C3%A9samo.avif 340w, imgcarta/302%20Temaki%20de%20at%C3%BAn%2C%20aguacate%20y%20s%C3%A9samo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">302</div>
@@ -1002,7 +1385,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/303%20Temaki%20de%20langostino%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de langostino, aguacate y sésamo" loading="lazy">
+        <img src="imgcarta/303%20Temaki%20de%20langostino%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de langostino, aguacate y sésamo" loading="lazy" decoding="async" srcset="imgcarta/sm/303%20Temaki%20de%20langostino%2C%20aguacate%20y%20s%C3%A9samo.avif 340w, imgcarta/303%20Temaki%20de%20langostino%2C%20aguacate%20y%20s%C3%A9samo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">303</div>
@@ -1013,7 +1396,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/304%20Temaki%20vegetal.avif" alt="Temaki vegetal" loading="lazy">
+        <img src="imgcarta/304%20Temaki%20vegetal.avif" alt="Temaki vegetal" loading="lazy" decoding="async" srcset="imgcarta/sm/304%20Temaki%20vegetal.avif 340w, imgcarta/304%20Temaki%20vegetal.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">304</div>
@@ -1025,7 +1408,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/305%20Temaki%20de%20anguila%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de anguila, aguacate y sésamo" loading="lazy">
+        <img src="imgcarta/305%20Temaki%20de%20anguila%2C%20aguacate%20y%20s%C3%A9samo.avif" alt="Temaki de anguila, aguacate y sésamo" loading="lazy" decoding="async" srcset="imgcarta/sm/305%20Temaki%20de%20anguila%2C%20aguacate%20y%20s%C3%A9samo.avif 340w, imgcarta/305%20Temaki%20de%20anguila%2C%20aguacate%20y%20s%C3%A9samo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">305</div>
@@ -1040,7 +1423,7 @@
 <div class="divider-section"></div>
 
 <!-- ESPECIALIDADES Y CALIFORNIA -->
-<section class="carta-section alt-bg">
+<section class="carta-section alt-bg" id="cat-especialidades-y-california">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1053,7 +1436,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/400%20Verde%20roll%20salm%C3%B3n%202p.avif" alt="Verde roll salmón 2p" loading="lazy">
+        <img src="imgcarta/400%20Verde%20roll%20salm%C3%B3n%202p.avif" alt="Verde roll salmón 2p" loading="lazy" decoding="async" srcset="imgcarta/sm/400%20Verde%20roll%20salm%C3%B3n%202p.avif 340w, imgcarta/400%20Verde%20roll%20salm%C3%B3n%202p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">400</div>
@@ -1065,7 +1448,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/401%20Verde%20roll%20vegetal%202p.avif" alt="Verde roll vegetal 2p" loading="lazy">
+        <img src="imgcarta/401%20Verde%20roll%20vegetal%202p.avif" alt="Verde roll vegetal 2p" loading="lazy" decoding="async" srcset="imgcarta/sm/401%20Verde%20roll%20vegetal%202p.avif 340w, imgcarta/401%20Verde%20roll%20vegetal%202p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">401</div>
@@ -1077,7 +1460,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/402%20Crunch%20cali%20roll%208p.avif" alt="Crunch cali roll 8p" loading="lazy">
+        <img src="imgcarta/402%20Crunch%20cali%20roll%208p.avif" alt="Crunch cali roll 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/402%20Crunch%20cali%20roll%208p.avif 340w, imgcarta/402%20Crunch%20cali%20roll%208p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">402</div>
@@ -1087,11 +1470,12 @@
       </div>
     </div>
 
-    <div class="dish-card reveal">
+    <div class="dish-card tokusen reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/403%20Rainbow%20roll%208p.avif" alt="Rainbow roll 8p" loading="lazy">
+        <img src="imgcarta/403%20Rainbow%20roll%208p.avif" alt="Rainbow roll 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/403%20Rainbow%20roll%208p.avif 340w, imgcarta/403%20Rainbow%20roll%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
+        <span class="sr-solo">Especialidad de la casa</span>
         <div class="dish-num">403</div>
         <div class="dish-name">Rainbow roll 8p</div>
         <div class="dish-desc">Salmón, atún, langostino, dorada, aguacate, cangrejo y pepino</div>
@@ -1101,7 +1485,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/404%20Dragon%20roll%20salm%C3%B3n%208p.avif" alt="Dragon roll salmón 8p" loading="lazy">
+        <img src="imgcarta/404%20Dragon%20roll%20salm%C3%B3n%208p.avif" alt="Dragon roll salmón 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/404%20Dragon%20roll%20salm%C3%B3n%208p.avif 340w, imgcarta/404%20Dragon%20roll%20salm%C3%B3n%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">404</div>
@@ -1113,7 +1497,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/405%20Dragon%20roll%20at%C3%BAn%208p.avif" alt="Dragon roll atún 8p" loading="lazy">
+        <img src="imgcarta/405%20Dragon%20roll%20at%C3%BAn%208p.avif" alt="Dragon roll atún 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/405%20Dragon%20roll%20at%C3%BAn%208p.avif 340w, imgcarta/405%20Dragon%20roll%20at%C3%BAn%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">405</div>
@@ -1123,11 +1507,12 @@
       </div>
     </div>
 
-    <div class="dish-card reveal">
+    <div class="dish-card tokusen reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/406%20Tottori%20roll%208p.avif" alt="Tottori roll 8p" loading="lazy">
+        <img src="imgcarta/406%20Tottori%20roll%208p.avif" alt="Tottori roll 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/406%20Tottori%20roll%208p.avif 340w, imgcarta/406%20Tottori%20roll%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
+        <span class="sr-solo">Especialidad de la casa</span>
         <div class="dish-num">406</div>
         <div class="dish-name">Tottori roll 8p</div>
         <div class="dish-desc">Atún, cangrejo, aguacate, pepino y salsa picante</div>
@@ -1137,7 +1522,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/407%20Salm%C3%B3n%20ikura%20roll%208p.avif" alt="Salmón ikura roll 8p" loading="lazy">
+        <img src="imgcarta/407%20Salm%C3%B3n%20ikura%20roll%208p.avif" alt="Salmón ikura roll 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/407%20Salm%C3%B3n%20ikura%20roll%208p.avif 340w, imgcarta/407%20Salm%C3%B3n%20ikura%20roll%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">407</div>
@@ -1149,7 +1534,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/408%20California%20de%20cangrejo%208p.avif" alt="California de cangrejo 8p" loading="lazy">
+        <img src="imgcarta/408%20California%20de%20cangrejo%208p.avif" alt="California de cangrejo 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/408%20California%20de%20cangrejo%208p.avif 340w, imgcarta/408%20California%20de%20cangrejo%208p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">408</div>
@@ -1161,7 +1546,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/409%20California%20masago%208p.avif" alt="California masago 8p" loading="lazy">
+        <img src="imgcarta/409%20California%20masago%208p.avif" alt="California masago 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/409%20California%20masago%208p.avif 340w, imgcarta/409%20California%20masago%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">409</div>
@@ -1173,7 +1558,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/410%20California%20de%20salm%C3%B3n%208p.avif" alt="California de salmón 8p" loading="lazy">
+        <img src="imgcarta/410%20California%20de%20salm%C3%B3n%208p.avif" alt="California de salmón 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/410%20California%20de%20salm%C3%B3n%208p.avif 340w, imgcarta/410%20California%20de%20salm%C3%B3n%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">410</div>
@@ -1185,7 +1570,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/411%20California%20de%20at%C3%BAn%208p.avif" alt="California de atún 8p" loading="lazy">
+        <img src="imgcarta/411%20California%20de%20at%C3%BAn%208p.avif" alt="California de atún 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/411%20California%20de%20at%C3%BAn%208p.avif 340w, imgcarta/411%20California%20de%20at%C3%BAn%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">411</div>
@@ -1197,7 +1582,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/412%20Spicy%20roll%20salm%C3%B3n%209p.avif" alt="Spicy roll salmón 9p" loading="lazy">
+        <img src="imgcarta/412%20Spicy%20roll%20salm%C3%B3n%209p.avif" alt="Spicy roll salmón 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/412%20Spicy%20roll%20salm%C3%B3n%209p.avif 340w, imgcarta/412%20Spicy%20roll%20salm%C3%B3n%209p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">412</div>
@@ -1209,7 +1594,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/413%20Spicy%20roll%20at%C3%BAn%209p.avif" alt="Spicy roll atún 9p" loading="lazy">
+        <img src="imgcarta/413%20Spicy%20roll%20at%C3%BAn%209p.avif" alt="Spicy roll atún 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/413%20Spicy%20roll%20at%C3%BAn%209p.avif 340w, imgcarta/413%20Spicy%20roll%20at%C3%BAn%209p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">413</div>
@@ -1221,7 +1606,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/414%20Spicy%20roll%20cangrejo%209p.avif" alt="Spicy roll cangrejo 9p" loading="lazy">
+        <img src="imgcarta/414%20Spicy%20roll%20cangrejo%209p.avif" alt="Spicy roll cangrejo 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/414%20Spicy%20roll%20cangrejo%209p.avif 340w, imgcarta/414%20Spicy%20roll%20cangrejo%209p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">414</div>
@@ -1233,7 +1618,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/415%20Crunch%20cali%20roll%20con%20salm%C3%B3n%208p.avif" alt="Crunch cali roll con salmón 8p" loading="lazy">
+        <img src="imgcarta/415%20Crunch%20cali%20roll%20con%20salm%C3%B3n%208p.avif" alt="Crunch cali roll con salmón 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/415%20Crunch%20cali%20roll%20con%20salm%C3%B3n%208p.avif 340w, imgcarta/415%20Crunch%20cali%20roll%20con%20salm%C3%B3n%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">415</div>
@@ -1245,7 +1630,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/418%20California%20de%20pollo%208p.avif" alt="California de pollo 8p" loading="lazy">
+        <img src="imgcarta/418%20California%20de%20pollo%208p.avif" alt="California de pollo 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/418%20California%20de%20pollo%208p.avif 340w, imgcarta/418%20California%20de%20pollo%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">418</div>
@@ -1256,7 +1641,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/419%20Rollin%20salm%C3%B3n%20cheese%206p.avif" alt="Rollin salmón cheese 6p" loading="lazy">
+        <img src="imgcarta/419%20Rollin%20salm%C3%B3n%20cheese%206p.avif" alt="Rollin salmón cheese 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/419%20Rollin%20salm%C3%B3n%20cheese%206p.avif 340w, imgcarta/419%20Rollin%20salm%C3%B3n%20cheese%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">419</div>
@@ -1267,7 +1652,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/420%20Uramaki%20yamasa.avif" alt="Uramaki yamasa" loading="lazy">
+        <img src="imgcarta/420%20Uramaki%20yamasa.avif" alt="Uramaki yamasa" loading="lazy" decoding="async" srcset="imgcarta/sm/420%20Uramaki%20yamasa.avif 340w, imgcarta/420%20Uramaki%20yamasa.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">420</div>
@@ -1278,7 +1663,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/421%20uramaki%20salm%C3%B3n%20flameado.avif" alt="Uramaki salmón flameado" loading="lazy">
+        <img src="imgcarta/421%20uramaki%20salm%C3%B3n%20flameado.avif" alt="Uramaki salmón flameado" loading="lazy" decoding="async" srcset="imgcarta/sm/421%20uramaki%20salm%C3%B3n%20flameado.avif 340w, imgcarta/421%20uramaki%20salm%C3%B3n%20flameado.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">421</div>
@@ -1289,7 +1674,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/422%20uramaki%20foie%20gras.avif" alt="Uramaki foie gras" loading="lazy">
+        <img src="imgcarta/422%20uramaki%20foie%20gras.avif" alt="Uramaki foie gras" loading="lazy" decoding="async" srcset="imgcarta/sm/422%20uramaki%20foie%20gras.avif 340w, imgcarta/422%20uramaki%20foie%20gras.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">422</div>
@@ -1300,7 +1685,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/431%20Dragon%20roll%20anguila%208p.avif" alt="Dragon roll anguila 8p" loading="lazy">
+        <img src="imgcarta/431%20Dragon%20roll%20anguila%208p.avif" alt="Dragon roll anguila 8p" loading="lazy" decoding="async" srcset="imgcarta/sm/431%20Dragon%20roll%20anguila%208p.avif 340w, imgcarta/431%20Dragon%20roll%20anguila%208p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">431</div>
@@ -1315,7 +1700,7 @@
 <div class="divider-section"></div>
 
 <!-- GUNKAN -->
-<section class="carta-section">
+<section class="carta-section" id="cat-gunkan">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1328,7 +1713,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/501%20Gunkan%20de%20ikura%20%28huevos%20de%20salm%C3%B3n%29.avif" alt="Gunkan de ikura (huevos de salmón)" loading="lazy">
+        <img src="imgcarta/501%20Gunkan%20de%20ikura%20%28huevos%20de%20salm%C3%B3n%29.avif" alt="Gunkan de ikura (huevos de salmón)" loading="lazy" decoding="async" srcset="imgcarta/sm/501%20Gunkan%20de%20ikura%20%28huevos%20de%20salm%C3%B3n%29.avif 340w, imgcarta/501%20Gunkan%20de%20ikura%20%28huevos%20de%20salm%C3%B3n%29.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">501</div>
@@ -1339,7 +1724,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/502%20Gunkan%20de%20tobikko%20rojo.avif" alt="Gunkan de tobikko rojo" loading="lazy">
+        <img src="imgcarta/502%20Gunkan%20de%20tobikko%20rojo.avif" alt="Gunkan de tobikko rojo" loading="lazy" decoding="async" srcset="imgcarta/sm/502%20Gunkan%20de%20tobikko%20rojo.avif 340w, imgcarta/502%20Gunkan%20de%20tobikko%20rojo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">502</div>
@@ -1350,7 +1735,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/503%20Gunkan%20de%20tobbiko%20verde.avif" alt="Gunkan de tobbiko verde" loading="lazy">
+        <img src="imgcarta/503%20Gunkan%20de%20tobbiko%20verde.avif" alt="Gunkan de tobbiko verde" loading="lazy" decoding="async" srcset="imgcarta/sm/503%20Gunkan%20de%20tobbiko%20verde.avif 340w, imgcarta/503%20Gunkan%20de%20tobbiko%20verde.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">503</div>
@@ -1361,7 +1746,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/504%20Gunkan%20de%20salm%C3%B3n%20picante.avif" alt="Gunkan de salmón picante" loading="lazy">
+        <img src="imgcarta/504%20Gunkan%20de%20salm%C3%B3n%20picante.avif" alt="Gunkan de salmón picante" loading="lazy" decoding="async" srcset="imgcarta/sm/504%20Gunkan%20de%20salm%C3%B3n%20picante.avif 340w, imgcarta/504%20Gunkan%20de%20salm%C3%B3n%20picante.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">504</div>
@@ -1372,7 +1757,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/505%20Gunkan%20de%20at%C3%BAn%20picante.avif" alt="Gunkan de atún picante" loading="lazy">
+        <img src="imgcarta/505%20Gunkan%20de%20at%C3%BAn%20picante.avif" alt="Gunkan de atún picante" loading="lazy" decoding="async" srcset="imgcarta/sm/505%20Gunkan%20de%20at%C3%BAn%20picante.avif 340w, imgcarta/505%20Gunkan%20de%20at%C3%BAn%20picante.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">505</div>
@@ -1383,7 +1768,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/506%20Gunkan%20de%20cangrejo.avif" alt="Gunkan de cangrejo" loading="lazy">
+        <img src="imgcarta/506%20Gunkan%20de%20cangrejo.avif" alt="Gunkan de cangrejo" loading="lazy" decoding="async" srcset="imgcarta/sm/506%20Gunkan%20de%20cangrejo.avif 340w, imgcarta/506%20Gunkan%20de%20cangrejo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">506</div>
@@ -1394,7 +1779,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/507%20Tulipa%20de%20ikura.avif" alt="Tulipa de ikura" loading="lazy">
+        <img src="imgcarta/507%20Tulipa%20de%20ikura.avif" alt="Tulipa de ikura" loading="lazy" decoding="async" srcset="imgcarta/sm/507%20Tulipa%20de%20ikura.avif 340w, imgcarta/507%20Tulipa%20de%20ikura.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">507</div>
@@ -1406,7 +1791,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/508%20Inari%20de%20Cangrejo.avif" alt="Inari de Cangrejo" loading="lazy">
+        <img src="imgcarta/508%20Inari%20de%20Cangrejo.avif" alt="Inari de Cangrejo" loading="lazy" decoding="async" srcset="imgcarta/sm/508%20Inari%20de%20Cangrejo.avif 340w, imgcarta/508%20Inari%20de%20Cangrejo.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">508</div>
@@ -1417,7 +1802,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/509%20Inari%20de%20salm%C3%B3n.avif" alt="Inari de salmón" loading="lazy">
+        <img src="imgcarta/509%20Inari%20de%20salm%C3%B3n.avif" alt="Inari de salmón" loading="lazy" decoding="async" srcset="imgcarta/sm/509%20Inari%20de%20salm%C3%B3n.avif 340w, imgcarta/509%20Inari%20de%20salm%C3%B3n.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">509</div>
@@ -1428,7 +1813,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/510%20Inari%20de%20at%C3%BAn.avif" alt="Inari de atún" loading="lazy">
+        <img src="imgcarta/510%20Inari%20de%20at%C3%BAn.avif" alt="Inari de atún" loading="lazy" decoding="async" srcset="imgcarta/sm/510%20Inari%20de%20at%C3%BAn.avif 340w, imgcarta/510%20Inari%20de%20at%C3%BAn.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">510</div>
@@ -1443,7 +1828,7 @@
 <div class="divider-section"></div>
 
 <!-- NIGIRI -->
-<section class="carta-section alt-bg">
+<section class="carta-section alt-bg" id="cat-nigiri">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1456,7 +1841,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/601%20Nigiri%20de%20salm%C3%B3n%206p.avif" alt="Nigiri de salmón 6p" loading="lazy">
+        <img src="imgcarta/601%20Nigiri%20de%20salm%C3%B3n%206p.avif" alt="Nigiri de salmón 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/601%20Nigiri%20de%20salm%C3%B3n%206p.avif 340w, imgcarta/601%20Nigiri%20de%20salm%C3%B3n%206p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">601</div>
@@ -1467,7 +1852,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/602%20Nigiri%20de%20at%C3%BAn%206p.avif" alt="Nigiri de atún 6p" loading="lazy">
+        <img src="imgcarta/602%20Nigiri%20de%20at%C3%BAn%206p.avif" alt="Nigiri de atún 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/602%20Nigiri%20de%20at%C3%BAn%206p.avif 340w, imgcarta/602%20Nigiri%20de%20at%C3%BAn%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">602</div>
@@ -1478,7 +1863,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/603%20Nigiri%20de%20langostino%206p.avif" alt="Nigiri de langostino 6p" loading="lazy">
+        <img src="imgcarta/603%20Nigiri%20de%20langostino%206p.avif" alt="Nigiri de langostino 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/603%20Nigiri%20de%20langostino%206p.avif 340w, imgcarta/603%20Nigiri%20de%20langostino%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">603</div>
@@ -1489,7 +1874,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/604%20Nigiri%20de%20tortilla%206p.avif" alt="Nigiri de tortilla 6p" loading="lazy">
+        <img src="imgcarta/604%20Nigiri%20de%20tortilla%206p.avif" alt="Nigiri de tortilla 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/604%20Nigiri%20de%20tortilla%206p.avif 340w, imgcarta/604%20Nigiri%20de%20tortilla%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">604</div>
@@ -1500,7 +1885,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/605%20Nigiri%20de%20anguila%206p.avif" alt="Nigiri de anguila 6p" loading="lazy">
+        <img src="imgcarta/605%20Nigiri%20de%20anguila%206p.avif" alt="Nigiri de anguila 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/605%20Nigiri%20de%20anguila%206p.avif 340w, imgcarta/605%20Nigiri%20de%20anguila%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">605</div>
@@ -1511,7 +1896,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/606%20Nigiri%20de%20dorada%206p.avif" alt="Nigiri de dorada 6p" loading="lazy">
+        <img src="imgcarta/606%20Nigiri%20de%20dorada%206p.avif" alt="Nigiri de dorada 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/606%20Nigiri%20de%20dorada%206p.avif 340w, imgcarta/606%20Nigiri%20de%20dorada%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">606</div>
@@ -1522,7 +1907,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/607%20Nigiri%20de%20camar%C3%B3n%206p.avif" alt="Nigiri de camarón 6p" loading="lazy">
+        <img src="imgcarta/607%20Nigiri%20de%20camar%C3%B3n%206p.avif" alt="Nigiri de camarón 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/607%20Nigiri%20de%20camar%C3%B3n%206p.avif 340w, imgcarta/607%20Nigiri%20de%20camar%C3%B3n%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">607</div>
@@ -1533,7 +1918,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/608%20Nigiri%20de%20tofu%206p.avif" alt="Nigiri de tofu 6p" loading="lazy">
+        <img src="imgcarta/608%20Nigiri%20de%20tofu%206p.avif" alt="Nigiri de tofu 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/608%20Nigiri%20de%20tofu%206p.avif 340w, imgcarta/608%20Nigiri%20de%20tofu%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">608</div>
@@ -1544,7 +1929,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/609%20Nigiri%20de%20vieira%206p.avif" alt="Nigiri de vieira 6p" loading="lazy">
+        <img src="imgcarta/609%20Nigiri%20de%20vieira%206p.avif" alt="Nigiri de vieira 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/609%20Nigiri%20de%20vieira%206p.avif 340w, imgcarta/609%20Nigiri%20de%20vieira%206p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">609</div>
@@ -1555,7 +1940,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/610%20Nigiri%20de%20salm%C3%B3n%20flambeado%206p.avif" alt="Nigiri de salmón flambeado 6p" loading="lazy">
+        <img src="imgcarta/610%20Nigiri%20de%20salm%C3%B3n%20flambeado%206p.avif" alt="Nigiri de salmón flambeado 6p" loading="lazy" decoding="async" srcset="imgcarta/sm/610%20Nigiri%20de%20salm%C3%B3n%20flambeado%206p.avif 340w, imgcarta/610%20Nigiri%20de%20salm%C3%B3n%20flambeado%206p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">610</div>
@@ -1571,7 +1956,7 @@
 <div class="divider-section"></div>
 
 <!-- CHIRASHI TATAKI -->
-<section class="carta-section">
+<section class="carta-section" id="cat-chirashi-tataki">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1582,11 +1967,12 @@
 
   <div class="dish-grid">
 
-    <div class="dish-card reveal">
+    <div class="dish-card tokusen reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/700%20Paste%20de%20Tottori.avif" alt="Paste de Tottori" loading="lazy">
+        <img src="imgcarta/700%20Paste%20de%20Tottori.avif" alt="Paste de Tottori" loading="lazy" decoding="async" srcset="imgcarta/sm/700%20Paste%20de%20Tottori.avif 340w, imgcarta/700%20Paste%20de%20Tottori.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
+        <span class="sr-solo">Especialidad de la casa</span>
         <div class="dish-num">700</div>
         <div class="dish-name">Paste de Tottori</div>
         <div class="dish-desc">Atún, salmón, aguacate, menta y almendras</div>
@@ -1596,7 +1982,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/701%20Chirashi%20de%20Salm%C3%B3n.avif" alt="Chirashi de Salmón" loading="lazy">
+        <img src="imgcarta/701%20Chirashi%20de%20Salm%C3%B3n.avif" alt="Chirashi de Salmón" loading="lazy" decoding="async" srcset="imgcarta/sm/701%20Chirashi%20de%20Salm%C3%B3n.avif 340w, imgcarta/701%20Chirashi%20de%20Salm%C3%B3n.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">701</div>
@@ -1607,7 +1993,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/702%20Chirashi%20variado.avif" alt="Chirashi variado" loading="lazy">
+        <img src="imgcarta/702%20Chirashi%20variado.avif" alt="Chirashi variado" loading="lazy" decoding="async" srcset="imgcarta/sm/702%20Chirashi%20variado.avif 340w, imgcarta/702%20Chirashi%20variado.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">702</div>
@@ -1619,7 +2005,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/703%20Tataki%20de%20at%C3%BAn.avif" alt="Tataki de atún" loading="lazy">
+        <img src="imgcarta/703%20Tataki%20de%20at%C3%BAn.avif" alt="Tataki de atún" loading="lazy" decoding="async" srcset="imgcarta/sm/703%20Tataki%20de%20at%C3%BAn.avif 340w, imgcarta/703%20Tataki%20de%20at%C3%BAn.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">703</div>
@@ -1630,7 +2016,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/704%20Tataki%20de%20salm%C3%B3n.avif" alt="Tataki de salmón" loading="lazy">
+        <img src="imgcarta/704%20Tataki%20de%20salm%C3%B3n.avif" alt="Tataki de salmón" loading="lazy" decoding="async" srcset="imgcarta/sm/704%20Tataki%20de%20salm%C3%B3n.avif 340w, imgcarta/704%20Tataki%20de%20salm%C3%B3n.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">704</div>
@@ -1645,7 +2031,7 @@
 <div class="divider-section"></div>
 
 <!-- SASHIMI -->
-<section class="carta-section alt-bg">
+<section class="carta-section alt-bg" id="cat-sashimi">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1658,7 +2044,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/705%20Sashimi%20de%20salm%C3%B3n%209p.avif" alt="Sashimi de salmón 9p" loading="lazy">
+        <img src="imgcarta/705%20Sashimi%20de%20salm%C3%B3n%209p.avif" alt="Sashimi de salmón 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/705%20Sashimi%20de%20salm%C3%B3n%209p.avif 340w, imgcarta/705%20Sashimi%20de%20salm%C3%B3n%209p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">705</div>
@@ -1670,7 +2056,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/706%20Sashimi%20de%20at%C3%BAn%209p.avif" alt="Sashimi de atún 9p" loading="lazy">
+        <img src="imgcarta/706%20Sashimi%20de%20at%C3%BAn%209p.avif" alt="Sashimi de atún 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/706%20Sashimi%20de%20at%C3%BAn%209p.avif 340w, imgcarta/706%20Sashimi%20de%20at%C3%BAn%209p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">706</div>
@@ -1682,7 +2068,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/707%20Sashimi%20variado%209p.avif" alt="Sashimi variado 9p" loading="lazy">
+        <img src="imgcarta/707%20Sashimi%20variado%209p.avif" alt="Sashimi variado 9p" loading="lazy" decoding="async" srcset="imgcarta/sm/707%20Sashimi%20variado%209p.avif 340w, imgcarta/707%20Sashimi%20variado%209p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">707</div>
@@ -1694,7 +2080,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/710%20poke%20de%20salm%C3%B3n.avif" alt="Poke de salmón" loading="lazy">
+        <img src="imgcarta/710%20poke%20de%20salm%C3%B3n.avif" alt="Poke de salmón" loading="lazy" decoding="async" srcset="imgcarta/sm/710%20poke%20de%20salm%C3%B3n.avif 340w, imgcarta/710%20poke%20de%20salm%C3%B3n.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">710</div>
@@ -1705,7 +2091,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/711%20poke%20pollo.avif" alt="Poke pollo" loading="lazy">
+        <img src="imgcarta/711%20poke%20pollo.avif" alt="Poke pollo" loading="lazy" decoding="async" srcset="imgcarta/sm/711%20poke%20pollo.avif 340w, imgcarta/711%20poke%20pollo.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">711</div>
@@ -1720,7 +2106,7 @@
 <div class="divider-section"></div>
 
 <!-- MENÚS SUSHI -->
-<section class="carta-section">
+<section class="carta-section" id="cat-menus-sushi">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1733,7 +2119,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/800%20Maki%20combinado.avif" alt="Maki combinado" loading="lazy">
+        <img src="imgcarta/800%20Maki%20combinado.avif" alt="Maki combinado" loading="lazy" decoding="async" srcset="imgcarta/sm/800%20Maki%20combinado.avif 340w, imgcarta/800%20Maki%20combinado.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">800</div>
@@ -1745,7 +2131,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/801%20Men%C3%BA%20one.avif" alt="Menú one" loading="lazy">
+        <img src="imgcarta/801%20Men%C3%BA%20one.avif" alt="Menú one" loading="lazy" decoding="async" srcset="imgcarta/sm/801%20Men%C3%BA%20one.avif 340w, imgcarta/801%20Men%C3%BA%20one.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">801</div>
@@ -1757,7 +2143,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/802%20Men%C3%BA%20two.avif" alt="Menú two" loading="lazy">
+        <img src="imgcarta/802%20Men%C3%BA%20two.avif" alt="Menú two" loading="lazy" decoding="async" srcset="imgcarta/sm/802%20Men%C3%BA%20two.avif 340w, imgcarta/802%20Men%C3%BA%20two.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">802</div>
@@ -1769,7 +2155,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/803%20Men%C3%BA%20Three.avif" alt="Menú three" loading="lazy">
+        <img src="imgcarta/803%20Men%C3%BA%20Three.avif" alt="Menú three" loading="lazy" decoding="async" srcset="imgcarta/sm/803%20Men%C3%BA%20Three.avif 340w, imgcarta/803%20Men%C3%BA%20Three.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">803</div>
@@ -1781,7 +2167,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/804%20Men%C3%BA%20four.avif" alt="Menú four" loading="lazy">
+        <img src="imgcarta/804%20Men%C3%BA%20four.avif" alt="Menú four" loading="lazy" decoding="async" srcset="imgcarta/sm/804%20Men%C3%BA%20four.avif 340w, imgcarta/804%20Men%C3%BA%20four.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">804</div>
@@ -1793,7 +2179,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/805%20Maxi%20maki%201.avif" alt="Maxi maki 1" loading="lazy">
+        <img src="imgcarta/805%20Maxi%20maki%201.avif" alt="Maxi maki 1" loading="lazy" decoding="async" srcset="imgcarta/sm/805%20Maxi%20maki%201.avif 340w, imgcarta/805%20Maxi%20maki%201.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">805</div>
@@ -1805,7 +2191,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/806%20Maxi%20maki%202.avif" alt="Maxi maki 2" loading="lazy">
+        <img src="imgcarta/806%20Maxi%20maki%202.avif" alt="Maxi maki 2" loading="lazy" decoding="async" srcset="imgcarta/sm/806%20Maxi%20maki%202.avif 340w, imgcarta/806%20Maxi%20maki%202.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">806</div>
@@ -1817,7 +2203,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/807%20Combinaci%C3%B3n%201%20%2817piezas%29.avif" alt="Combinación 1 (17 piezas)" loading="lazy">
+        <img src="imgcarta/807%20Combinaci%C3%B3n%201%20%2817piezas%29.avif" alt="Combinación 1 (17 piezas)" loading="lazy" decoding="async" srcset="imgcarta/sm/807%20Combinaci%C3%B3n%201%20%2817piezas%29.avif 340w, imgcarta/807%20Combinaci%C3%B3n%201%20%2817piezas%29.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">807</div>
@@ -1829,7 +2215,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/808%20Combinaci%C3%B3n%202%20%2824%20piezas%29.avif" alt="Combinación 2 (24 piezas)" loading="lazy">
+        <img src="imgcarta/808%20Combinaci%C3%B3n%202%20%2824%20piezas%29.avif" alt="Combinación 2 (24 piezas)" loading="lazy" decoding="async" srcset="imgcarta/sm/808%20Combinaci%C3%B3n%202%20%2824%20piezas%29.avif 340w, imgcarta/808%20Combinaci%C3%B3n%202%20%2824%20piezas%29.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">808</div>
@@ -1841,7 +2227,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/809%20Combinaci%C3%B3n%203%20%2842%20piezas%29.avif" alt="Combinación 3 (42 piezas)" loading="lazy">
+        <img src="imgcarta/809%20Combinaci%C3%B3n%203%20%2842%20piezas%29.avif" alt="Combinación 3 (42 piezas)" loading="lazy" decoding="async" srcset="imgcarta/sm/809%20Combinaci%C3%B3n%203%20%2842%20piezas%29.avif 340w, imgcarta/809%20Combinaci%C3%B3n%203%20%2842%20piezas%29.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">809</div>
@@ -1853,7 +2239,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/810%20Combinaci%C3%B3n%204%20%2858%20piezas%29.avif" alt="Combinación 4 (58 piezas)" loading="lazy">
+        <img src="imgcarta/810%20Combinaci%C3%B3n%204%20%2858%20piezas%29.avif" alt="Combinación 4 (58 piezas)" loading="lazy" decoding="async" srcset="imgcarta/sm/810%20Combinaci%C3%B3n%204%20%2858%20piezas%29.avif 340w, imgcarta/810%20Combinaci%C3%B3n%204%20%2858%20piezas%29.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">810</div>
@@ -1863,11 +2249,12 @@
       </div>
     </div>
 
-    <div class="dish-card reveal">
+    <div class="dish-card tokusen reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/811%20Combinaci%C3%B3n%205%20%2844%20piezas%29.avif" alt="Combinación 5 (44 piezas)" loading="lazy">
+        <img src="imgcarta/811%20Combinaci%C3%B3n%205%20%2844%20piezas%29.avif" alt="Combinación 5 (44 piezas)" loading="lazy" decoding="async" srcset="imgcarta/sm/811%20Combinaci%C3%B3n%205%20%2844%20piezas%29.avif 340w, imgcarta/811%20Combinaci%C3%B3n%205%20%2844%20piezas%29.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
+        <span class="sr-solo">Especialidad de la casa</span>
         <div class="dish-num">811</div>
         <div class="dish-name">Combinación 5 (44 piezas)</div>
         <div class="dish-desc">6p spicy roll salmón, 4p crunch cali roll, 6p maki de atún, 6p maki de aguacate, 6p maki de salmón, 6p maki de cangrejo, 2p nigiri de salmón, 2p nigiri de atún, 2p langostino, 4p dragon roll wakame</div>
@@ -1881,7 +2268,7 @@
 <div class="divider-section"></div>
 
 <!-- POSTRES -->
-<section class="carta-section">
+<section class="carta-section" id="cat-postres">
   <div class="section-header reveal">
     <div>
       <div class="section-label">Nuestra carta</div>
@@ -1894,7 +2281,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/951%20Mochi%20de%20fresa%2C%20chocolate%20o%20t%C3%A9%20verde%201p.avif" alt="Mochi de fresa, chocolate o té verde 1p" loading="lazy">
+        <img src="imgcarta/951%20Mochi%20de%20fresa%2C%20chocolate%20o%20t%C3%A9%20verde%201p.avif" alt="Mochi de fresa, chocolate o té verde 1p" loading="lazy" decoding="async" srcset="imgcarta/sm/951%20Mochi%20de%20fresa%2C%20chocolate%20o%20t%C3%A9%20verde%201p.avif 340w, imgcarta/951%20Mochi%20de%20fresa%2C%20chocolate%20o%20t%C3%A9%20verde%201p.avif 608w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="608" height="608">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">951</div>
@@ -1905,7 +2292,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/952%20Torayaki%201p.avif" alt="Torayaki 1p" loading="lazy">
+        <img src="imgcarta/952%20Torayaki%201p.avif" alt="Torayaki 1p" loading="lazy" decoding="async" srcset="imgcarta/sm/952%20Torayaki%201p.avif 340w, imgcarta/952%20Torayaki%201p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">952</div>
@@ -1916,7 +2303,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/953%20Helado%20de%20s%C3%A9samo%20negro%20o%20t%C3%A9%20verde%202bolas.avif" alt="Helado de sésamo negro o té verde 2 bolas" loading="lazy">
+        <img src="imgcarta/953%20Helado%20de%20s%C3%A9samo%20negro%20o%20t%C3%A9%20verde%202bolas.avif" alt="Helado de sésamo negro o té verde 2 bolas" loading="lazy" decoding="async" srcset="imgcarta/sm/953%20Helado%20de%20s%C3%A9samo%20negro%20o%20t%C3%A9%20verde%202bolas.avif 340w, imgcarta/953%20Helado%20de%20s%C3%A9samo%20negro%20o%20t%C3%A9%20verde%202bolas.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">953</div>
@@ -1927,7 +2314,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/954%20Tiramis%C3%BA%20de%20t%C3%A9%20verde.avif" alt="Tiramisú de té verde" loading="lazy">
+        <img src="imgcarta/954%20Tiramis%C3%BA%20de%20t%C3%A9%20verde.avif" alt="Tiramisú de té verde" loading="lazy" decoding="async" srcset="imgcarta/sm/954%20Tiramis%C3%BA%20de%20t%C3%A9%20verde.avif 340w, imgcarta/954%20Tiramis%C3%BA%20de%20t%C3%A9%20verde.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">954</div>
@@ -1938,7 +2325,7 @@
 
     <div class="dish-card reveal">
       <div class="dish-card-img">
-        <img src="imgcarta/955%20Mochi%20de%20Yogurt%2C%20Coco%20o%20chocolate%202p.avif" alt="Mochi de Yogurt, Coco o chocolate 2p" loading="lazy">
+        <img src="imgcarta/955%20Mochi%20de%20Yogurt%2C%20Coco%20o%20chocolate%202p.avif" alt="Mochi de Yogurt, Coco o chocolate 2p" loading="lazy" decoding="async" srcset="imgcarta/sm/955%20Mochi%20de%20Yogurt%2C%20Coco%20o%20chocolate%202p.avif 340w, imgcarta/955%20Mochi%20de%20Yogurt%2C%20Coco%20o%20chocolate%202p.avif 671w" sizes="(max-width:380px) 92vw, (max-width:640px) 47vw, (max-width:1024px) 31vw, 24vw" width="671" height="671">
       </div>
       <div class="dish-card-body">
         <div class="dish-num">955</div>
@@ -1952,16 +2339,46 @@
 
 <div class="divider-section"></div>
 
-<footer>TOTTORI <span>Restaurant japonès · Gavà</span></div>
+<footer>
+  <div class="footer-logo">TOTTORI <span>Restaurant japonès · Gavà</span></div>
   <ul class="footer-links">
     <li><a href="index.html#about">El Restaurante</a></li>
     <li><a href="menu.html">Menú</a></li>
     <li><a href="index.html#galeria">Galería</a></li>
     <li><a href="index.html#reservas">Reservas</a></li>
-
+    <li><a href="avisolegal.html">Aviso Legal</a></li>
   </ul>
   <div class="footer-copy">© 2026 Tottori Gavà · Barcelona</div>
 </footer>
+
+
+<!-- VISOR DE FOTOS -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Foto ampliada" hidden>
+  <div class="lb-counter" id="lbCounter"></div>
+  <button type="button" class="lb-btn lb-close" id="lbClose" aria-label="Cerrar">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>
+  </button>
+  <button type="button" class="lb-btn lb-prev" id="lbPrev" aria-label="Anterior">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M15 19l-7-7 7-7"/></svg>
+  </button>
+  <button type="button" class="lb-btn lb-next" id="lbNext" aria-label="Siguiente">
+    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M9 5l7 7-7 7"/></svg>
+  </button>
+  <figure class="lb-figure">
+    <div class="lb-media"><img id="lbImg" alt=""></div>
+    <figcaption class="lb-cap">
+      <span class="lb-num"  id="lbNum"></span>
+      <span class="lb-name" id="lbName"></span>
+      <span class="lb-desc" id="lbDesc"></span>
+      <span class="lb-price" id="lbPrice"></span>
+    </figcaption>
+  </figure>
+  <div class="lb-hint">← → para navegar · Esc para cerrar</div>
+</div>
+
+<button class="to-top" id="toTop" aria-label="Volver arriba">
+  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 19V5M5 12l7-7 7 7"/></svg>
+</button>
 
 <script>
   const navbar = document.getElementById('navbar');
@@ -1989,6 +2406,303 @@
     });
   }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
   document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+
+  /* ── Barra de progreso de lectura ── */
+  (function(){
+    const bar = document.querySelector('.scroll-progress');
+    if (!bar) return;
+    let ticking = false;
+    const update = () => {
+      const max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = 'scaleX(' + (max > 0 ? window.scrollY / max : 0) + ')';
+      ticking = false;
+    };
+    window.addEventListener('scroll', () => { if (!ticking) { ticking = true; requestAnimationFrame(update); } }, { passive: true });
+    window.addEventListener('resize', update, { passive: true });
+    update();
+  })();
+
+  /* ── ¿Abierto ahora? Calculado en hora de Madrid ── */
+  (function(){
+    const nodes = document.querySelectorAll('[data-open-status]');
+    if (!nodes.length) return;
+    // 0 domingo … 6 sábado. Tramos en minutos desde medianoche.
+    const HORARIO = {
+      0: [[720, 960], [1140, 1380]],
+      1: [],
+      2: [[720, 960], [1140, 1380]],
+      3: [[720, 960], [1140, 1380]],
+      4: [[720, 960], [1140, 1380]],
+      5: [[720, 960], [1140, 1440]],
+      6: [[720, 960], [1140, 1440]]
+    };
+    const DIAS = ['domingo','lunes','martes','miércoles','jueves','viernes','sábado'];
+    function ahoraMadrid() {
+      const f = new Intl.DateTimeFormat('es-ES', {
+        timeZone: 'Europe/Madrid', weekday: 'short', hour: '2-digit', minute: '2-digit', hour12: false
+      }).formatToParts(new Date());
+      const g = t => f.find(p => p.type === t).value;
+      const wd = { 'dom': 0, 'lun': 1, 'mar': 2, 'mié': 3, 'mie': 3, 'jue': 4, 'vie': 5, 'sáb': 6, 'sab': 6 };
+      const key = g('weekday').toLowerCase().replace('.', '').slice(0, 3);
+      return { dia: wd[key] ?? new Date().getDay(), min: +g('hour') * 60 + +g('minute') };
+    }
+    function hhmm(m) { return String(Math.floor(m / 60) % 24).padStart(2, '0') + ':' + String(m % 60).padStart(2, '0'); }
+    const { dia, min } = ahoraMadrid();
+    const hoy = HORARIO[dia];
+    let abierto = null;
+    for (const [a, b] of hoy) if (min >= a && min < b) { abierto = b; break; }
+    let texto, clase;
+    if (abierto !== null) {
+      texto = 'Abierto ahora · hasta las ' + hhmm(abierto);
+      clase = 'is-open';
+    } else {
+      let prox = hoy.find(([a]) => min < a);
+      if (prox) {
+        texto = 'Cerrado · abre a las ' + hhmm(prox[0]);
+      } else {
+        let d = dia, saltos = 0;
+        do { d = (d + 1) % 7; saltos++; } while (!HORARIO[d].length && saltos < 8);
+        texto = 'Cerrado · abre el ' + DIAS[d] + ' a las ' + hhmm(HORARIO[d][0][0]);
+      }
+      clase = 'is-closed';
+    }
+    nodes.forEach(n => { n.textContent = texto; n.classList.remove('is-open', 'is-closed'); n.classList.add(clase); });
+  })();
+
+  /* ── Altura real del nav: la barra de categorías se pega justo debajo ── */
+  const setNavH = () => document.documentElement.style.setProperty('--nav-h', navbar.offsetHeight + 'px');
+  setNavH();
+  window.addEventListener('resize', setNavH, { passive: true });
+  window.addEventListener('scroll', () => { setNavH(); }, { passive: true, once: true });
+  navbar.addEventListener('transitionend', setNavH);
+
+  /* ── Buscador de la carta ── */
+  (function(){
+    const input   = document.getElementById('dishSearch');
+    const clearBt = document.getElementById('searchClear');
+    const count   = document.getElementById('cartaCount');
+    const noRes   = document.getElementById('noResults');
+    const noTerm  = document.getElementById('noResultsTerm');
+    const resetBt = document.getElementById('resetSearch');
+    const chipBox = document.getElementById('cartaChips');
+    if (!input) return;
+
+    const chips     = [...document.querySelectorAll('.chip')];
+    const secciones = [...document.querySelectorAll('.carta-section')];
+    const divisores = [...document.querySelectorAll('.divider-section')];
+    const norm = t => t.normalize('NFD').replace(/[\u0300-\u036f]/g, '').toLowerCase();
+    const fichas = [...document.querySelectorAll('.dish-card')].map(el => ({ el, txt: norm(el.textContent) }));
+
+    function limpiar() {
+      fichas.forEach(f => f.el.hidden = false);
+      secciones.forEach(s => s.hidden = false);
+      divisores.forEach(d => d.hidden = false);
+      count.hidden = true; noRes.hidden = true;
+      clearBt.hidden = !input.value;
+    }
+
+    function filtrar() {
+      const crudo = input.value.trim();
+      clearBt.hidden = !crudo;
+      if (!crudo) { limpiar(); marcarPorScroll(); return; }
+
+      const t = norm(crudo);
+      let n = 0;
+      fichas.forEach(f => {
+        const ok = f.txt.includes(t);
+        f.el.hidden = !ok;
+        f.el.classList.add('visible');   // sin esperar a la animación de scroll
+        if (ok) n++;
+      });
+      secciones.forEach(s => { s.hidden = !s.querySelector('.dish-card:not([hidden])'); });
+      divisores.forEach(d => d.hidden = true);
+
+      count.hidden = false;
+      count.innerHTML = '<strong>' + n + '</strong> ' + (n === 1 ? 'plato' : 'platos') + ' con «' + crudo.replace(/</g, '&lt;') + '»';
+      noRes.hidden = n > 0;
+      noTerm.textContent = '«' + crudo + '»';
+      chips.forEach(c => c.classList.remove('active'));
+    }
+
+    let deb;
+    input.addEventListener('input', () => { clearTimeout(deb); deb = setTimeout(filtrar, 120); });
+    input.addEventListener('search', filtrar);
+    clearBt.addEventListener('click', () => { input.value = ''; filtrar(); input.focus(); });
+    resetBt.addEventListener('click', () => { input.value = ''; filtrar(); input.scrollIntoView({ block: 'center' }); });
+    document.addEventListener('keydown', e => {
+      if (e.key === 'Escape' && document.activeElement === input) { input.value = ''; filtrar(); }
+    });
+
+    /* ── Categorías: chip activo según la sección visible ── */
+    function activar(id) {
+      chips.forEach(c => {
+        const on = c.dataset.target === id;
+        c.classList.toggle('active', on);
+        if (on && chipBox) {
+          const r = c.getBoundingClientRect(), p = chipBox.getBoundingClientRect();
+          if (r.left < p.left + 8 || r.right > p.right - 8) {
+            chipBox.scrollTo({ left: c.offsetLeft - p.width / 2 + r.width / 2, behavior: 'smooth' });
+          }
+        }
+      });
+    }
+    let ultima = '';
+    function marcarPorScroll() {
+      const linea = window.innerHeight * 0.35;
+      let actual = '';
+      for (const s of secciones) {
+        if (s.hidden || !s.id) continue;
+        if (s.getBoundingClientRect().top <= linea) actual = s.id;
+      }
+      if (actual && actual !== ultima) { ultima = actual; activar(actual); }
+    }
+    let esperando = false;
+    window.addEventListener('scroll', () => {
+      if (esperando) return;
+      esperando = true;
+      requestAnimationFrame(() => { marcarPorScroll(); esperando = false; });
+    }, { passive: true });
+    marcarPorScroll();
+  })();
+
+  /* ── Volver arriba ── */
+  (function(){
+    const bt = document.getElementById('toTop');
+    if (!bt) return;
+    bt.addEventListener('click', () => window.scrollTo({ top: 0, behavior: 'smooth' }));
+    window.addEventListener('scroll', () => bt.classList.toggle('show', window.scrollY > 900), { passive: true });
+  })();
+
+  /* ── Visor de fotos a pantalla completa ── */
+  (function(){
+    const lb = document.getElementById('lightbox');
+    if (!lb) return;
+    const img = document.getElementById('lbImg');
+    const elNum = document.getElementById('lbNum'), elName = document.getElementById('lbName');
+    const elDesc = document.getElementById('lbDesc'), elPrice = document.getElementById('lbPrice');
+    const elCount = document.getElementById('lbCounter');
+    const btPrev = document.getElementById('lbPrev'), btNext = document.getElementById('lbNext');
+
+    const txt = (el, sel) => { const n = el.querySelector(sel); return n ? n.textContent.trim() : ''; };
+    const items = [...document.querySelectorAll('.dish-card, .menu-card, .g-item, .strip-item')]
+      .filter(el => el.querySelector('img'))
+      .map(el => ({
+        el,
+        src:   el.querySelector('img').getAttribute('src'),
+        num:   txt(el, '.dish-num') || txt(el, '.card-num'),
+        name:  txt(el, '.dish-name') || txt(el, 'h3') || el.querySelector('img').alt || '',
+        desc:  txt(el, '.dish-desc') || txt(el, '.menu-card-body p'),
+        price: txt(el, '.dish-price') || txt(el, '.card-price')
+      }));
+    if (!items.length) return;
+
+    items.forEach((it, i) => {
+      it.el.setAttribute('role', 'button');
+      it.el.setAttribute('tabindex', '0');
+      it.el.addEventListener('click', () => abrir(i));
+      it.el.addEventListener('keydown', e => {
+        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); abrir(i); }
+      });
+    });
+
+    let idx = -1, previo = null;
+    const visibles = () => items.filter(it => !it.el.hidden && it.el.offsetParent !== null);
+
+    function pintar(i) {
+      const lista = visibles();
+      const pos = lista.findIndex(x => x === items[i]);
+      const it = items[i];
+      img.classList.remove('ready');
+      const tmp = new Image();
+      tmp.onload = () => { img.src = it.src; img.alt = it.name; img.classList.add('ready'); };
+      tmp.src = it.src;
+      if (tmp.complete) tmp.onload();
+      elNum.textContent = it.num;
+      elName.textContent = it.name;
+      elDesc.textContent = it.desc;
+      elPrice.textContent = it.price;
+      elCount.textContent = pos >= 0 ? (pos + 1) + ' / ' + lista.length : '';
+      const varios = lista.length > 1;
+      btPrev.hidden = btNext.hidden = !varios;
+      // precarga vecinos
+      if (pos >= 0) [lista[pos - 1], lista[pos + 1]].forEach(v => { if (v) new Image().src = v.src; });
+    }
+
+    function abrir(i) {
+      previo = document.activeElement;
+      idx = i;
+      lb.hidden = false;
+      requestAnimationFrame(() => lb.classList.add('show'));
+      document.body.style.overflow = 'hidden';
+      pintar(idx);
+      document.getElementById('lbClose').focus();
+    }
+    function cerrar() {
+      lb.classList.remove('show');
+      document.body.style.overflow = '';
+      setTimeout(() => { lb.hidden = true; img.removeAttribute('src'); }, 280);
+      if (previo && previo.focus) previo.focus();
+    }
+    function mover(paso) {
+      const lista = visibles();
+      if (lista.length < 2) return;
+      let pos = lista.findIndex(x => x === items[idx]);
+      if (pos < 0) pos = 0;
+      const sig = lista[(pos + paso + lista.length) % lista.length];
+      idx = items.indexOf(sig);
+      pintar(idx);
+    }
+
+    document.getElementById('lbClose').addEventListener('click', cerrar);
+    btPrev.addEventListener('click', () => mover(-1));
+    btNext.addEventListener('click', () => mover(1));
+    lb.addEventListener('click', e => { if (e.target === lb || e.target.classList.contains('lb-figure') || e.target.classList.contains('lb-media')) cerrar(); });
+    document.addEventListener('keydown', e => {
+      if (lb.hidden) return;
+      if (e.key === 'Escape') cerrar();
+      else if (e.key === 'ArrowLeft') mover(-1);
+      else if (e.key === 'ArrowRight') mover(1);
+    });
+
+    /* gestos: deslizar para cambiar o cerrar */
+    let x0 = null, y0 = null;
+    lb.addEventListener('touchstart', e => { x0 = e.touches[0].clientX; y0 = e.touches[0].clientY; }, { passive: true });
+    lb.addEventListener('touchend', e => {
+      if (x0 === null) return;
+      const dx = e.changedTouches[0].clientX - x0, dy = e.changedTouches[0].clientY - y0;
+      if (Math.abs(dx) > 55 && Math.abs(dx) > Math.abs(dy)) mover(dx < 0 ? 1 : -1);
+      else if (dy > 90 && Math.abs(dy) > Math.abs(dx)) cerrar();
+      x0 = y0 = null;
+    }, { passive: true });
+  })();
+
+  /* ── Las fotos entran con un fundido en cuanto cargan ── */
+  (function(){
+    document.documentElement.classList.add('js-fade');
+    const marcar = im => im.classList.add('cargada');
+    document.querySelectorAll('.dish-card-img img, .menu-card-img img, .g-item img, .strip-item img, .about-img img, .daily-img img')
+      .forEach(im => {
+        im.style.transition = 'opacity .55s ease, transform .6s, filter .5s';
+        if (im.complete && im.naturalWidth) marcar(im);
+        else { im.addEventListener('load', () => marcar(im)); im.addEventListener('error', () => marcar(im)); }
+      });
+    // red de seguridad: pase lo que pase, a los 4 s se ven todas
+    setTimeout(() => document.querySelectorAll('.js-fade img:not(.cargada)').forEach(marcar), 4000);
+  })();
 </script>
+
+<div class="mobile-actions" role="navigation" aria-label="Acciones rápidas">
+  <a href="tel:936388770"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M5 3h4l2 5-2.5 1.5a11 11 0 005 5L15 12l5 2v4a2 2 0 01-2 2A16 16 0 013 5a2 2 0 012-2z"/></svg><span>Llamar</span></a>
+  <a class="ma-wa" href="https://wa.me/34688006355" target="_blank" rel="noopener"><svg width="19" height="19" viewBox="0 0 24 24" fill="currentColor"><path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2 22l5.25-1.38a9.9 9.9 0 004.79 1.22h.01c5.46 0 9.91-4.45 9.91-9.91 0-2.65-1.03-5.14-2.9-7.01A9.82 9.82 0 0012.04 2zm0 1.67c2.2 0 4.27.86 5.83 2.42a8.19 8.19 0 012.41 5.82c0 4.54-3.7 8.24-8.24 8.24a8.24 8.24 0 01-4.2-1.15l-.3-.18-3.12.82.83-3.04-.2-.31a8.2 8.2 0 01-1.26-4.38c0-4.54 3.7-8.24 8.25-8.24zm-2.5 4.1c-.16 0-.42.06-.64.3-.22.24-.85.83-.85 2.02s.87 2.34.99 2.5c.12.16 1.7 2.6 4.13 3.64.58.25 1.03.4 1.38.51.58.19 1.11.16 1.53.1.47-.07 1.43-.59 1.63-1.15.2-.56.2-1.04.14-1.14-.06-.1-.22-.16-.46-.28-.24-.12-1.43-.71-1.65-.79-.22-.08-.38-.12-.54.12-.16.24-.62.79-.76.95-.14.16-.28.18-.52.06-.24-.12-1.02-.38-1.94-1.2-.72-.64-1.2-1.43-1.34-1.67-.14-.24-.02-.37.1-.49.11-.11.24-.28.36-.42.12-.14.16-.24.24-.4.08-.16.04-.3-.02-.42-.06-.12-.54-1.3-.74-1.78-.19-.46-.39-.4-.54-.41h-.5z"/></svg><span>WhatsApp</span></a>
+  <a href="menu.html"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M4 3v8a3 3 0 003 3v7M7 3v6M10 3v6"/><path d="M18 3c-1.5 2-2 4-2 7h4c0-3-.5-5-2-7zM18 10v11"/></svg><span>Menú día</span></a>
+  <a href="https://maps.google.com/?q=Calle+St.+Pere+37,Gav%C3%A0,Barcelona" target="_blank" rel="noopener"><svg width="19" height="19" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z"/><circle cx="12" cy="9" r="2.5"/></svg><span>Llegar</span></a>
+</div>
+
+
+
+<script type="application/ld+json">
+{"@context":"https://schema.org","@type":"Menu","name":"Carta de Tottori Gavà","inLanguage":"es","url":"https://tottorigava.es/carta.html","provider":{"@type":"Restaurant","name":"Tottori Gavà","@id":"https://tottorigava.es/#restaurante"},"hasMenuSection":[{"@type":"MenuSection","name":"Entrantes","hasMenuItem":[{"@type":"MenuItem","name":"Edamame","offers":{"@type":"Offer","price":"4.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ensalada wakame","offers":{"@type":"Offer","price":"4.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ensalada tottori","offers":{"@type":"Offer","price":"6.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Sopa de miso","offers":{"@type":"Offer","price":"4.20","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Yakisoba de verduras","offers":{"@type":"Offer","price":"5.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Yakisoba de pollo","offers":{"@type":"Offer","price":"6.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Yakisoba con gambas","offers":{"@type":"Offer","price":"6.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Yakimeshi","offers":{"@type":"Offer","price":"5.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gyoza de carne","offers":{"@type":"Offer","price":"6.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rollito de marisco","offers":{"@type":"Offer","price":"5.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Chicken teriyaki","offers":{"@type":"Offer","price":"6.20","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tempura batter mix","description":"Selección de tempuras de gambas, zanahoria, calabaza, cebolla, pimiento y berenjena","offers":{"@type":"Offer","price":"10.80","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Oyakodon","description":"Pollo crujiente con arroz","offers":{"@type":"Offer","price":"10.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Katsudon","description":"Chuleta crujiente con arroz","offers":{"@type":"Offer","price":"10.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Arroz blanco","offers":{"@type":"Offer","price":"3.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Arroz con huevo","offers":{"@type":"Offer","price":"4.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Takoyaki","offers":{"@type":"Offer","price":"6.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Ensalada de salmón","offers":{"@type":"Offer","price":"8.60","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Makis","hasMenuItem":[{"@type":"MenuItem","name":"Makis de salmón 6p","offers":{"@type":"Offer","price":"5.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de atún 6p","offers":{"@type":"Offer","price":"5.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de anguila 6p","offers":{"@type":"Offer","price":"6.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de langostino 6p","offers":{"@type":"Offer","price":"5.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de aguacate 6p","offers":{"@type":"Offer","price":"4.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de cangrejo 6p","offers":{"@type":"Offer","price":"4.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de tortilla 6p","offers":{"@type":"Offer","price":"4.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis de pepino 6p","offers":{"@type":"Offer","price":"4.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis variado 6p","description":"Salmón, atún y aguacate","offers":{"@type":"Offer","price":"6.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis variado 12p","description":"Salmón, atún, langostino, aguacate","offers":{"@type":"Offer","price":"10.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis plátano","offers":{"@type":"Offer","price":"5.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis fresa","offers":{"@type":"Offer","price":"5.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Makis foie fras"},{"@type":"MenuItem","name":"Makis de pollo","offers":{"@type":"Offer","price":"5.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Maki de Queso 6p","offers":{"@type":"Offer","price":"4.60","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Verde Makis","hasMenuItem":[{"@type":"MenuItem","name":"Verde maki de salmón y aguacate 6p","offers":{"@type":"Offer","price":"7.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Verde maki de atún y aguacate 6p","offers":{"@type":"Offer","price":"8.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Verde maki de langostino y aguacate 6p","offers":{"@type":"Offer","price":"7.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Verde maki de cangrejo y aguacate 6p","offers":{"@type":"Offer","price":"6.60","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Futomakis","hasMenuItem":[{"@type":"MenuItem","name":"Futomaki de cangrejo, aguacate y queso 8p","offers":{"@type":"Offer","price":"9.25","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de salmón, mango y langostino","offers":{"@type":"Offer","price":"12.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de salmón y aguacate 8p","offers":{"@type":"Offer","price":"10.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de atún y aguacate 8p","offers":{"@type":"Offer","price":"12.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de tempura de gambas 8p","offers":{"@type":"Offer","price":"12.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de salmón, queso y mango 8p","offers":{"@type":"Offer","price":"12.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de pollo crujiente 8p","offers":{"@type":"Offer","price":"12.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Futomaki de Cangrejo 8p","description":"Ensalada, mayonesa masago, y cangrejo rebozado","offers":{"@type":"Offer","price":"12.95","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Temakis","hasMenuItem":[{"@type":"MenuItem","name":"Temaki de salmón, aguacate y sésamo","offers":{"@type":"Offer","price":"5.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Temaki de atún, aguacate y sésamo","offers":{"@type":"Offer","price":"5.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Temaki de langostino, aguacate y sésamo","offers":{"@type":"Offer","price":"5.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Temaki vegetal","description":"Aguacate, pimiento rojo, pepino, lechuga, tortilla y sésamo","offers":{"@type":"Offer","price":"4.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Temaki de anguila, aguacate y sésamo","offers":{"@type":"Offer","price":"6.35","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Especialidades y California","hasMenuItem":[{"@type":"MenuItem","name":"Verde roll salmón 2p","description":"Aguacate, pimiento rojo, lechuga, tortilla, sésamo y salmón","offers":{"@type":"Offer","price":"8.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Verde roll vegetal 2p","description":"Aguacate, pimiento rojo, pepino, lechuga, tortilla y sésamo","offers":{"@type":"Offer","price":"7.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crunch cali roll 8p","description":"Cangrejo, pepino, aguacate, cebolla frita y salsa picante","offers":{"@type":"Offer","price":"7.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rainbow roll 8p","description":"Salmón, atún, langostino, dorada, aguacate, cangrejo y pepino","offers":{"@type":"Offer","price":"9.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Dragon roll salmón 8p","description":"Salmón, aguacate, cangrejo y pepino","offers":{"@type":"Offer","price":"9.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Dragon roll atún 8p","description":"Atún, aguacate, cangrejo y pepino","offers":{"@type":"Offer","price":"9.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tottori roll 8p","description":"Atún, cangrejo, aguacate, pepino y salsa picante","offers":{"@type":"Offer","price":"11.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Salmón ikura roll 8p","description":"Salmón, huevos de salmón, queso, cangrejo y aguacate","offers":{"@type":"Offer","price":"11.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"California de cangrejo 8p","description":"Cangrejo, aguacate y sésamo","offers":{"@type":"Offer","price":"8.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"California masago 8p","description":"Cangrejo, aguacate y masago","offers":{"@type":"Offer","price":"8.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"California de salmón 8p","description":"Salmón, aguacate y sésamo","offers":{"@type":"Offer","price":"8.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"California de atún 8p","description":"Atún, aguacate y sésamo","offers":{"@type":"Offer","price":"8.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Spicy roll salmón 9p","description":"Salmón, aguacate, pepino y salsa picante","offers":{"@type":"Offer","price":"8.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Spicy roll atún 9p","description":"Atún, aguacate, pepino y salsa picante","offers":{"@type":"Offer","price":"8.80","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Spicy roll cangrejo 9p","description":"Cangrejo, aguacate, pepino y salsa picante","offers":{"@type":"Offer","price":"8.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Crunch cali roll con salmón 8p","description":"Salmón, pepino, aguacate, cebolla frita y salsa picante","offers":{"@type":"Offer","price":"8.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"California de pollo 8p","offers":{"@type":"Offer","price":"8.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Rollin salmón cheese 6p","offers":{"@type":"Offer","price":"7.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Uramaki yamasa","offers":{"@type":"Offer","price":"12.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Uramaki salmón flameado","offers":{"@type":"Offer","price":"9.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Uramaki foie gras","offers":{"@type":"Offer","price":"13.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Dragon roll anguila 8p","offers":{"@type":"Offer","price":"13.30","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Gunkan","hasMenuItem":[{"@type":"MenuItem","name":"Gunkan de ikura (huevos de salmón)","offers":{"@type":"Offer","price":"3.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gunkan de tobikko rojo","offers":{"@type":"Offer","price":"3.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gunkan de tobbiko verde","offers":{"@type":"Offer","price":"3.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gunkan de salmón picante","offers":{"@type":"Offer","price":"3.35","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gunkan de atún picante","offers":{"@type":"Offer","price":"3.55","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Gunkan de cangrejo","offers":{"@type":"Offer","price":"2.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tulipa de ikura","description":"Salmón, huevos de salmón","offers":{"@type":"Offer","price":"4.85","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Inari de Cangrejo","offers":{"@type":"Offer","price":"3.15","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Inari de salmón","offers":{"@type":"Offer","price":"3.55","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Inari de atún","offers":{"@type":"Offer","price":"3.65","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Nigiri","hasMenuItem":[{"@type":"MenuItem","name":"Nigiri de salmón 6p","offers":{"@type":"Offer","price":"8.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de atún 6p","offers":{"@type":"Offer","price":"10.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de langostino 6p","offers":{"@type":"Offer","price":"10.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de tortilla 6p","offers":{"@type":"Offer","price":"7.80","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de anguila 6p","offers":{"@type":"Offer","price":"11.80","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de dorada 6p","offers":{"@type":"Offer","price":"9.20","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de camarón 6p","offers":{"@type":"Offer","price":"11.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de tofu 6p","offers":{"@type":"Offer","price":"7.80","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de vieira 6p","offers":{"@type":"Offer","price":"12.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Nigiri de salmón flambeado 6p","description":"Salmón y salsa mayonesa","offers":{"@type":"Offer","price":"9.50","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Chirashi Tataki","hasMenuItem":[{"@type":"MenuItem","name":"Paste de Tottori","description":"Atún, salmón, aguacate, menta y almendras","offers":{"@type":"Offer","price":"12.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Chirashi de Salmón","offers":{"@type":"Offer","price":"10.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Chirashi variado","description":"Atún, salmón y anguila","offers":{"@type":"Offer","price":"13.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tataki de atún","offers":{"@type":"Offer","price":"11.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tataki de salmón","offers":{"@type":"Offer","price":"10.60","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Sashimi","hasMenuItem":[{"@type":"MenuItem","name":"Sashimi de salmón 9p","offers":{"@type":"Offer","price":"13.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Sashimi de atún 9p","offers":{"@type":"Offer","price":"14.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Sashimi variado 9p","offers":{"@type":"Offer","price":"17.50","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poke de salmón","offers":{"@type":"Offer","price":"11.95","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Poke pollo","offers":{"@type":"Offer","price":"10.95","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Menús Sushi","hasMenuItem":[{"@type":"MenuItem","name":"Maki combinado","description":"6p salmón, 6p atún, 6p aguacate, 6p cangrejo","offers":{"@type":"Offer","price":"15.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Menú one","description":"3p nigiri salmón, 3p nigiri atún, 3p maki salmón, 3p maki atún","offers":{"@type":"Offer","price":"11.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Menú two","description":"6p nigiri salmón, 6p california salmón","offers":{"@type":"Offer","price":"13.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Menú three","description":"4p nigiri salmón, 4p nigiri atún, 2p maki atún, 2p maki salmón, 2p california salmón","offers":{"@type":"Offer","price":"15.30","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Menú four","description":"1p nigiri salmón, 1p nigiri atún, 1p nigiri, 1p nigiri langostino, 1p nigiri dorada, 4p maki atún, 4p maki salmón y 6p spicy roll cangrejo","offers":{"@type":"Offer","price":"16.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Maxi maki 1","description":"6p maki salmón, 6p maki atún y 6p spicy atún","offers":{"@type":"Offer","price":"15.90","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Maxi maki 2","description":"6p verde salmón, 6p california salmón, 6p maki salmón","offers":{"@type":"Offer","price":"15.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Combinación 1 (17 piezas)","description":"Nigiri salmón, nigiri atún, nigiri langostino, nigiri dorada, nigiri anguila, ikura y california salmón con mango","offers":{"@type":"Offer","price":"26.00","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Combinación 2 (24 piezas)","description":"Nigiris de pulpo, anguila, atún, salmón, caballa, dorada, langostino y tortilla; gunkan de masago, tobbiko, makis de atún y salmón, california de masago y california de salmón","offers":{"@type":"Offer","price":"31.60","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Combinación 3 (42 piezas)","description":"Nigiris de atún, langostino, dorada, salmón; gunkan de masago, tobikko; makis de salmón y atún; sashimi de salmón y atún; california de salmón","offers":{"@type":"Offer","price":"45.00","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Combinación 4 (58 piezas)","description":"Nigiris de langostino, camarón, veira, anguila, tortilla, dorada, pulpo, caballa, salmón y atún; sashimi de salmón y atún; gunkan de masago y tobikko; makis de salmón y atún; california de salmón; futomaki y verde maki salmón","offers":{"@type":"Offer","price":"63.00","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Combinación 5 (44 piezas)","description":"6p spicy roll salmón, 4p crunch cali roll, 6p maki de atún, 6p maki de aguacate, 6p maki de salmón, 6p maki de cangrejo, 2p nigiri de salmón, 2p nigiri de atún, 2p langostino, 4p dragon roll wakame","offers":{"@type":"Offer","price":"39.90","priceCurrency":"EUR"}}]},{"@type":"MenuSection","name":"Postres","hasMenuItem":[{"@type":"MenuItem","name":"Mochi de fresa, chocolate o té verde 1p","offers":{"@type":"Offer","price":"4.25","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Torayaki 1p","offers":{"@type":"Offer","price":"4.65","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Helado de sésamo negro o té verde 2 bolas","offers":{"@type":"Offer","price":"4.25","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Tiramisú de té verde","offers":{"@type":"Offer","price":"4.55","priceCurrency":"EUR"}},{"@type":"MenuItem","name":"Mochi de Yogurt, Coco o chocolate 2p","offers":{"@type":"Offer","price":"4.55","priceCurrency":"EUR"}}]}]}
+</script>
+
 </body>
 </html>
