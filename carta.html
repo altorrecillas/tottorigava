@@ -224,12 +224,15 @@
   /* DISH CARD */
   .dish-card {
     position: relative; background: var(--dark); overflow: hidden; cursor: pointer;
-    box-shadow: inset 0 0 0 1px rgba(201,169,110,.06);
-    transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s;
+    border-radius: 12px;
+    border: 1px solid rgba(201,169,110,.32);
+    box-shadow: 0 14px 30px -20px rgba(0,0,0,.7);
+    transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s, border-color .45s;
   }
   .dish-card:hover {
     transform: translateY(-6px); z-index: 2;
-    box-shadow: inset 0 0 0 1px rgba(201,169,110,.2), 0 26px 50px -24px rgba(0,0,0,1);
+    border-color: rgba(201,169,110,.6);
+    box-shadow: 0 26px 50px -24px rgba(0,0,0,1);
   }
 
   /* — Sello 特選: marca de especialidad de la casa. Hace eco del sello rojo
@@ -254,12 +257,7 @@
   .dish-card:hover .dish-card-img img {
     transform: scale(1.06); filter: brightness(1.03) saturate(1.18) contrast(1.04);
   }
-  .dish-card-img::after {
-    content: ''; position: absolute; inset: 0;
-    background: linear-gradient(to top, rgba(10,8,6,.8) 0%, rgba(28,20,10,.1) 46%, rgba(201,169,110,.05) 100%);
-    pointer-events: none;
-  }
-  .dish-card-body { padding: 22px 24px 26px; }
+  .dish-card-body { padding: 22px 24px 26px; border-top: 1px solid rgba(201,169,110,.18); }
   .dish-num {
     font-family: 'Montserrat', sans-serif; font-size: 36px;
     font-weight: 300; line-height: 1;

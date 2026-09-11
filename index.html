@@ -262,13 +262,15 @@
   .menu-tab.active, .menu-tab:hover { background:var(--gold); color:var(--black); border-color:var(--gold); }
   .menu-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:3px; }
   .menu-card { position:relative; background:var(--dark); overflow:hidden; cursor:pointer;
-    box-shadow: inset 0 0 0 1px rgba(201,169,110,.06);
-    transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s; }
+    border-radius:12px; border:1px solid rgba(201,169,110,.32);
+    box-shadow: 0 14px 30px -20px rgba(0,0,0,.7);
+    transition: transform .45s cubic-bezier(.2,.7,.3,1), box-shadow .45s, border-color .45s; }
   .menu-card:hover { transform:translateY(-6px); z-index:2;
-    box-shadow: inset 0 0 0 1px rgba(201,169,110,.2), 0 26px 50px -24px rgba(0,0,0,1); }
+    border-color: rgba(201,169,110,.6);
+    box-shadow: 0 26px 50px -24px rgba(0,0,0,1); }
   /* Tarjeta destacada (Combinación 5) */
-  .menu-card-featured { background:rgba(201,169,110,.05); box-shadow:inset 0 0 0 1px rgba(201,169,110,.22); }
-  .menu-card-featured:hover { box-shadow:inset 0 0 0 1px rgba(201,169,110,.45), 0 26px 50px -24px rgba(0,0,0,1); }
+  .menu-card-featured { background:rgba(201,169,110,.05); border-color: rgba(201,169,110,.5); }
+  .menu-card-featured:hover { border-color: rgba(201,169,110,.75); box-shadow: 0 26px 50px -24px rgba(0,0,0,1); }
   .menu-card-featured .card-num, .menu-card-featured .card-jp { color:var(--gold); }
   .menu-card-featured .card-price { color:var(--gold-light); }
   .menu-card-featured .card-tag { color:var(--gold); border-color:rgba(201,169,110,.4); }
@@ -291,8 +293,7 @@
     filter:brightness(.96) saturate(1.1) contrast(1.04); transition:transform .6s, filter .5s;
   }
   .menu-card:hover .menu-card-img img { transform:scale(1.06); filter:brightness(1.03) saturate(1.18) contrast(1.04); }
-  .menu-card-img::after { content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(10,8,6,.8) 0%, rgba(28,20,10,.1) 46%, rgba(201,169,110,.05) 100%); }
-  .menu-card-body { padding:26px 30px 30px; }
+  .menu-card-body { padding:26px 30px 30px; border-top: 1px solid rgba(201,169,110,.18); }
   .card-num { font-family:'Cormorant Garamond',serif; font-size:11px; color:var(--gold-muted); letter-spacing:.2em; margin-bottom:8px; }
   .card-jp { font-family:'Noto Serif JP',serif; font-size:20px; font-weight:200; color:var(--gold-light); margin-bottom:6px; }
   .menu-card h3 { font-family:'Cormorant Garamond',serif; font-size:20px; font-weight:400; color:var(--white); margin-bottom:8px; letter-spacing:.02em; }
