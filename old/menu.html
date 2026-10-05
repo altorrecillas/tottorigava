@@ -1,0 +1,719 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú del Día — Tottori Gavà · Restaurant Japonès</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #0a0806;
+    --dark: #111009;
+    --surface: #16140f;
+    --gold: #c9a96e;
+    --gold-light: #e4c98a;
+    --gold-muted: #7a6240;
+    --cream: #f0e8d8;
+    --cream-dim: #a89878;
+    --white: #faf6ef;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black); color: var(--cream);
+    font-family: 'Montserrat', sans-serif; font-weight: 300;
+    overflow-x: hidden;
+  }
+
+  /* NOISE OVERLAY */
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity: .03; pointer-events: none; z-index: 1000;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 500;
+    padding: 32px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    transition: background .5s, padding .4s;
+  }
+  nav.scrolled {
+    background: rgba(10,8,6,.93); backdrop-filter: blur(14px);
+    padding: 18px 60px; border-bottom: 1px solid rgba(201,169,110,.1);
+  }
+  .nav-logo {
+    font-family: 'Noto Serif JP', serif; font-weight: 200;
+    font-size: 11px; letter-spacing: .35em; color: var(--gold);
+    text-transform: uppercase; text-decoration: none;
+  }
+  .nav-logo span {
+    display: block; font-family: 'Cormorant Garamond', serif;
+    font-size: 22px; letter-spacing: .15em; color: var(--white);
+    font-weight: 300; line-height: 1;
+  }
+  .nav-links { display: flex; gap: 44px; list-style: none; }
+  .nav-links a {
+    font-size: 10px; letter-spacing: .22em; text-transform: uppercase;
+    color: var(--cream-dim); text-decoration: none; transition: color .3s; position: relative;
+  }
+  .nav-links a::after {
+    content: ''; position: absolute; bottom: -4px; left: 0; right: 0;
+    height: 1px; background: var(--gold); transform: scaleX(0);
+    transform-origin: left; transition: transform .35s;
+  }
+  .nav-links a:hover { color: var(--gold-light); }
+  .nav-links a:hover::after { transform: scaleX(1); }
+  .nav-links a.active { color: var(--gold); }
+  .nav-links a.active::after { transform: scaleX(1); }
+  .nav-cta {
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--black); background: var(--gold); padding: 12px 24px;
+    text-decoration: none; transition: background .3s;
+  }
+  .nav-cta:hover { background: var(--gold-light); }
+
+  /* HAMBURGER */
+  .hamburger {
+    display: none;
+    flex-direction: column; justify-content: center; align-items: center;
+    width: 40px; height: 40px; gap: 5px;
+    background: none; border: none; padding: 0; z-index: 600; cursor: pointer;
+  }
+  .hamburger span {
+    display: block; width: 24px; height: 1px;
+    background: var(--gold); transition: transform .3s, opacity .3s, width .3s;
+    transform-origin: center;
+  }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+
+  .mobile-menu {
+    display: none;
+    position: fixed; inset: 0; z-index: 499;
+    background: rgba(10,8,6,.97); backdrop-filter: blur(16px);
+    flex-direction: column; align-items: center; justify-content: center;
+    opacity: 0; pointer-events: none; transition: opacity .4s ease;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(28px,8vw,44px);
+    font-weight: 300; letter-spacing: .05em; color: var(--cream-dim);
+    text-decoration: none; padding: 16px 40px; transition: color .3s;
+    border-bottom: 1px solid rgba(201,169,110,.08); width: 100%; text-align: center;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .mobile-menu .mobile-cta {
+    margin-top: 32px; font-family: 'Montserrat', sans-serif;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--black); background: var(--gold);
+    padding: 18px 48px; border-bottom: none; width: auto;
+  }
+
+  /* PAGE HERO */
+  .page-hero {
+    padding: 160px 60px 80px;
+    position: relative; overflow: hidden;
+    border-bottom: 1px solid rgba(201,169,110,.08);
+  }
+  .page-hero::before {
+    content: ''; position: absolute; inset: 0;
+    background: radial-gradient(ellipse 70% 80% at 80% 50%, rgba(201,169,110,.04), transparent 70%);
+    pointer-events: none;
+  }
+  .page-hero-kanji {
+    position: absolute; right: 5%; top: 50%; transform: translateY(-50%);
+    font-family: 'Noto Serif JP', serif; font-size: clamp(100px,14vw,220px); font-weight: 200;
+    color: transparent; -webkit-text-stroke: 1px rgba(201,169,110,.1);
+    line-height: 1; writing-mode: vertical-rl; user-select: none;
+    animation: fadeInRight 2s ease .3s both;
+  }
+  .page-hero-content { position: relative; z-index: 2; max-width: 660px; }
+  .page-tag {
+    display: inline-flex; align-items: center; gap: 12px;
+    font-size: 10px; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 24px; animation: fadeInUp 1s ease .2s both;
+  }
+  .page-tag::before { content: ''; width: 40px; height: 1px; background: var(--gold); }
+  .page-hero h1 {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(48px,6vw,88px);
+    font-weight: 300; line-height: .95; letter-spacing: -.01em; color: var(--white);
+    margin-bottom: 20px; animation: fadeInUp 1s ease .4s both;
+  }
+  .page-hero h1 em { font-style: italic; color: var(--gold-light); }
+  .page-hero p {
+    font-size: 13.5px; line-height: 1.9; color: var(--cream-dim);
+    animation: fadeInUp 1s ease .6s both;
+  }
+
+  /* BACK LINK */
+  .back-link {
+    display: inline-flex; align-items: center; gap: 10px;
+    font-size: 10px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--cream-dim); text-decoration: none; transition: color .3s;
+    margin-top: 32px; animation: fadeInUp 1s ease .7s both;
+  }
+  .back-link svg { transition: transform .3s; }
+  .back-link:hover { color: var(--gold); }
+  .back-link:hover svg { transform: translateX(-4px); }
+
+  /* DIVIDER */
+  .divider-section {
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold-muted), transparent);
+    margin: 0 60px;
+  }
+
+  /* MENU SECTION */
+  .menu-section {
+    padding: 100px 60px;
+    position: relative;
+  }
+  .menu-section::before {
+    content: ''; position: absolute; top: 0; left: 0; right: 0;
+    height: 1px; background: linear-gradient(to right, transparent, rgba(201,169,110,.2), transparent);
+  }
+  .menu-section.alt-bg { background: var(--surface); }
+
+  /* MENU HEADER */
+  .menu-header {
+    display: flex; justify-content: space-between; align-items: flex-start;
+    margin-bottom: 16px; flex-wrap: wrap; gap: 24px;
+  }
+  .menu-header-left { flex: 1; }
+  .section-label {
+    font-size: 9.5px; letter-spacing: .4em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 16px;
+    display: flex; align-items: center; gap: 16px;
+  }
+  .section-label::before { content: ''; width: 24px; height: 1px; background: var(--gold); }
+  .menu-title {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(52px, 7vw, 96px);
+    font-weight: 300; color: var(--white); line-height: .9;
+    letter-spacing: -.02em;
+  }
+  .menu-title em { font-style: italic; color: var(--gold-light); }
+  .menu-price-badge {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(48px, 6vw, 80px); font-weight: 300;
+    color: transparent; -webkit-text-stroke: 1px var(--gold);
+    line-height: 1; letter-spacing: -.02em; white-space: nowrap;
+    align-self: flex-start; padding-top: 4px;
+  }
+  .menu-description {
+    font-size: 12px; letter-spacing: .12em; text-transform: uppercase;
+    color: var(--cream-dim); margin-top: 20px; margin-bottom: 64px;
+    padding-left: 40px; border-left: 1px solid rgba(201,169,110,.2);
+    line-height: 1.8;
+  }
+
+  /* CURSO BLOCK */
+  .curso-block { margin-bottom: 64px; }
+  .curso-block:last-child { margin-bottom: 0; }
+  .curso-label {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 3vw, 34px); font-weight: 300;
+    color: var(--white); letter-spacing: .04em;
+    margin-bottom: 32px;
+    display: flex; align-items: center; gap: 20px;
+  }
+  .curso-label::after {
+    content: ''; flex: 1; height: 1px;
+    background: linear-gradient(to right, rgba(201,169,110,.2), transparent);
+  }
+  .curso-label span {
+    font-family: 'Noto Serif JP', serif; font-size: 11px; font-weight: 200;
+    color: var(--gold); letter-spacing: .3em; text-transform: uppercase;
+    align-self: center;
+  }
+  .curso-note {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--gold-muted); margin-bottom: 28px;
+    font-style: italic;
+  }
+
+  /* DISH GRID */
+  .dish-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 3px;
+  }
+
+  /* DISH CARD */
+  .dish-card {
+    position: relative; background: var(--dark); overflow: hidden;
+    cursor: default; transition: transform .4s;
+  }
+  .dish-card:hover { transform: translateY(-4px); }
+  .dish-card-img {
+    aspect-ratio: 4/3; overflow: hidden; position: relative;
+  }
+  .dish-card-img img {
+    width: 100%; height: 100%; object-fit: cover;
+    filter: brightness(.72) saturate(.82); transition: transform .6s, filter .5s;
+  }
+  .dish-card:hover .dish-card-img img {
+    transform: scale(1.06); filter: brightness(.9) saturate(1.05);
+  }
+  .dish-card-img::after {
+    content: ''; position: absolute; inset: 0;
+    background: linear-gradient(to top, rgba(10,8,6,.7) 0%, transparent 55%);
+    pointer-events: none;
+  }
+  .dish-card-body { padding: 20px 22px 24px; }
+  .dish-name {
+    font-family: 'Cormorant Garamond', serif; font-size: 18px;
+    font-weight: 400; color: var(--white); line-height: 1.2; letter-spacing: .02em;
+  }
+
+  /* A ELEGIR badge */
+  .elegir-badge {
+    display: inline-block;
+    font-size: 8.5px; letter-spacing: .28em; text-transform: uppercase;
+    color: var(--gold); border: 1px solid rgba(201,169,110,.3);
+    padding: 5px 10px; margin-bottom: 20px;
+  }
+
+  /* FOOTER */
+  footer {
+    background: var(--black); padding: 56px 60px;
+    border-top: 1px solid rgba(201,169,110,.1);
+    display: flex; align-items: center; justify-content: space-between;
+    flex-wrap: wrap; gap: 24px;
+  }
+  .footer-logo {
+    font-family: 'Cormorant Garamond', serif; font-size: 26px;
+    font-weight: 300; color: var(--white); letter-spacing: .1em;
+  }
+  .footer-logo span {
+    display: block; font-family: 'Noto Serif JP', serif;
+    font-size: 10px; font-weight: 200; letter-spacing: .4em;
+    color: var(--gold-muted); margin-top: 4px; text-transform: uppercase;
+  }
+  .footer-links { display: flex; gap: 28px; list-style: none; }
+  .footer-links a {
+    font-size: 10px; letter-spacing: .2em; text-transform: uppercase;
+    color: var(--cream-dim); text-decoration: none; transition: color .3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-copy { font-size: 10px; color: var(--gold-muted); letter-spacing: .1em; }
+
+  /* ANIMATIONS */
+  @keyframes fadeInUp   { from{opacity:0;transform:translateY(30px)} to{opacity:1;transform:translateY(0)} }
+  @keyframes fadeInRight{ from{opacity:0;transform:translateY(-50%) translateX(40px)} to{opacity:.4;transform:translateY(-50%) translateX(0)} }
+  .reveal { opacity: 0; transform: translateY(36px); transition: opacity .9s ease, transform .9s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:1024px){
+    nav { padding: 20px 24px; }
+    nav.scrolled { padding: 14px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+    .page-hero { padding: 130px 24px 60px; }
+    .page-hero-kanji { display: none; }
+    .menu-section { padding: 72px 24px; }
+    .divider-section { margin: 0 24px; }
+    .menu-header { flex-direction: column; gap: 12px; }
+    .menu-price-badge { font-size: clamp(36px, 8vw, 60px); }
+    .dish-grid { grid-template-columns: repeat(3, 1fr); }
+    footer { padding: 40px 24px; flex-direction: column; align-items: center; text-align: center; gap: 28px; }
+    .footer-links { flex-wrap: wrap; justify-content: center; gap: 16px 24px; }
+  }
+  @media(max-width:640px){
+    .dish-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media(max-width:380px){
+    nav { padding: 16px; }
+    .page-hero { padding: 110px 16px 48px; }
+    .menu-section { padding: 56px 16px; }
+    .divider-section { margin: 0 16px; }
+    .dish-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<nav id="navbar">
+  <a href="index.html" class="nav-logo"><span>TOTTORI</span>Restaurant Japonès</a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">El Restaurante</a></li>
+    <li><a href="carta.html">Carta</a></li>
+    <li><a href="menu.html" class="active">Menú del Día</a></li>
+    <li><a href="index.html#galeria">Galería</a></li>
+    <li><a href="index.html#location">Ubicación</a></li>
+  </ul>
+  <a href="tel:936388770" class="nav-cta">Reservar mesa</a>
+  <button class="hamburger" id="hamburger" aria-label="Abrir menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about" onclick="closeMobile()">El Restaurante</a>
+  <a href="carta.html" onclick="closeMobile()">Carta</a>
+  <a href="index.html#galeria" onclick="closeMobile()">Galería</a>
+  <a href="index.html#location" onclick="closeMobile()">Ubicación</a>
+  <a href="tel:936388770" class="mobile-cta">Reservar mesa</a>
+</div>
+
+<!-- PAGE HERO -->
+<div class="page-hero">
+  <div class="page-hero-kanji">日替</div>
+  <div class="page-hero-content">
+    <div class="page-tag">Tottori Gavà · Gavà, Barcelona</div>
+    <h1>Menú<br><em>del día</em></h1>
+    <p>Menú mediodía, días laborables.<br>Elaborado con los mejores ingredientes frescos de temporada.</p>
+    <a href="index.html" class="back-link">
+      <svg width="20" height="10" viewBox="0 0 20 10" fill="none"><path d="M20 5H2M6 1L2 5L6 9" stroke="currentColor" stroke-width="1"/></svg>
+      Volver al inicio
+    </a>
+  </div>
+</div>
+
+<!-- MENÚ 14,90 € -->
+<section class="menu-section">
+
+  <div class="menu-header reveal">
+    <div class="menu-header-left">
+      <div class="section-label">Menú del día</div>
+      <div class="menu-title"><em>Menú</em> One</div>
+    </div>
+    <div class="menu-price-badge">14,90 €</div>
+  </div>
+
+  <div class="menu-description reveal">
+    Primero + Segundo + Tercero · Bebida incluída
+  </div>
+
+  <!-- PRIMEROS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Primeros <span>一品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Edamame.avif" alt="Edamame" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Edamame</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sopa%20de%20miso.avif" alt="Sopa de miso" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sopa de miso</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Wakame.avif" alt="Wakame" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Wakame</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Gyozas.avif" alt="Gyozas" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Gyozas</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Ensalada%20de%20pollo.avif" alt="Ensalada de pollo" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Ensalada de pollo</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEGUNDOS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Segundos <span>二品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%201.1.avif" alt="Sushi variado 1" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 1</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%201.2.avif" alt="Sushi variado 2" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 2</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%201.3.avif" alt="Sushi variado 3" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 3</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERCEROS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Terceros <span>三品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Yakisoba.avif" alt="Yakisoba" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Yakisoba</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Yakimeshi.avif" alt="Yakimeshi" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Yakimeshi</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Chicken%20teriyaki.avif" alt="Chicken teriyaki" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Chicken teriyaki</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<div class="divider-section"></div>
+
+<!-- MENÚ 17,90 € -->
+<section class="menu-section alt-bg">
+
+  <div class="menu-header reveal">
+    <div class="menu-header-left">
+      <div class="section-label">Menú del día</div>
+      <div class="menu-title"><em>Menú</em> Two</div>
+    </div>
+    <div class="menu-price-badge">17,90 €</div>
+  </div>
+
+  <div class="menu-description reveal">
+    Primero + Segundo + Tercero + Postre · Bebida incluída
+  </div>
+
+  <!-- PRIMEROS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Primeros <span>一品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Ensalada%20tottori.avif" alt="Ensalada tottori" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Ensalada tottori</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Rollo%20de%20marisco.avif" alt="Rollo de marisco" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Rollo de marisco</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Takoyaki.avif" alt="Takoyaki" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Takoyaki</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Langostinos%20con%20panko.avif" alt="Langostinos con panko" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Langostinos con panko</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- SEGUNDOS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Segundos <span>二品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%202.1.avif" alt="Sushi variado 1" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 1</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%202.2.avif" alt="Sushi variado 2" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 2</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Sushi%20variado%202.3.avif" alt="Sushi variado 3" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Sushi variado 3</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- TERCEROS -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Terceros <span>三品目</span></div>
+    <div class="elegir-badge reveal">A elegir</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Yakisoba%20de%20gambas.avif" alt="Yakisoba de gambas" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Yakisoba de gambas</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Yakisoba%20de%20pollo.avif" alt="Yakisoba de pollo" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Yakisoba de pollo</div>
+        </div>
+      </div>
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Oyakodon.avif" alt="Oyakodon" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Oyakodon</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- POSTRE -->
+  <div class="curso-block">
+    <div class="curso-label reveal">Postre <span>デザート</span></div>
+    <div class="curso-note reveal">Incluído en el menú</div>
+    <div class="dish-grid">
+
+      <div class="dish-card reveal">
+        <div class="dish-card-img">
+          <img src="imgmenu/Postre.avif" alt="Postre" loading="lazy">
+        </div>
+        <div class="dish-card-body">
+          <div class="dish-name">Postre del día</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+</section>
+
+<div class="divider-section"></div>
+
+<footer>
+  <div class="footer-logo">TOTTORI <span>Restaurant japonès · Gavà</span></div>
+  <ul class="footer-links">
+    <li><a href="index.html#about">El Restaurante</a></li>
+    <li><a href="carta.html">Carta</a></li>
+    <li><a href="index.html#galeria">Galería</a></li>
+    <li><a href="index.html#reservas">Reservas</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Tottori Gavà · Barcelona</div>
+</footer>
+
+<script>
+  const navbar = document.getElementById('navbar');
+  window.addEventListener('scroll', () => navbar.classList.toggle('scrolled', window.scrollY > 80));
+
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach((e, i) => {
+      if (e.isIntersecting) {
+        setTimeout(() => e.target.classList.add('visible'), i * 60);
+        obs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .08, rootMargin: '0px 0px -40px 0px' });
+  document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

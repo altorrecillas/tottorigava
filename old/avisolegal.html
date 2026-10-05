@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Aviso Legal — Tottori Gavà</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Noto+Serif+JP:wght@200;300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+
+<style>
+  :root {
+    --black: #0a0806;
+    --dark: #111009;
+    --surface: #16140f;
+    --gold: #c9a96e;
+    --gold-light: #e4c98a;
+    --gold-muted: #7a6240;
+    --cream: #f0e8d8;
+    --cream-dim: #a89878;
+    --white: #faf6ef;
+  }
+  *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+  html { scroll-behavior: smooth; }
+  body {
+    background: var(--black); color: var(--cream);
+    font-family: 'Montserrat', sans-serif; font-weight: 300;
+    overflow-x: hidden;
+  }
+  body::before {
+    content: ''; position: fixed; inset: 0;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+    opacity:.03; pointer-events:none; z-index:1000;
+  }
+
+  /* NAV */
+  nav {
+    position: fixed; top:0; left:0; right:0; z-index:500;
+    padding: 32px 60px;
+    display: flex; align-items: center; justify-content: space-between;
+    background: rgba(10,8,6,.93); backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,169,110,.1);
+  }
+  .nav-logo {
+    font-family: 'Noto Serif JP',serif; font-weight:200;
+    font-size:11px; letter-spacing:.35em; color:var(--gold);
+    text-transform:uppercase; text-decoration:none;
+  }
+  .nav-logo span {
+    display:block; font-family:'Cormorant Garamond',serif;
+    font-size:22px; letter-spacing:.15em; color:var(--white);
+    font-weight:300; line-height:1;
+  }
+  .nav-links { display:flex; gap:44px; list-style:none; }
+  .nav-links a {
+    font-size:10px; letter-spacing:.22em; text-transform:uppercase;
+    color:var(--cream-dim); text-decoration:none; transition:color .3s; position:relative;
+  }
+  .nav-links a::after {
+    content:''; position:absolute; bottom:-4px; left:0; right:0;
+    height:1px; background:var(--gold); transform:scaleX(0);
+    transform-origin:left; transition:transform .35s;
+  }
+  .nav-links a:hover { color:var(--gold-light); }
+  .nav-links a:hover::after { transform:scaleX(1); }
+  .nav-cta {
+    font-size:10px; letter-spacing:.25em; text-transform:uppercase;
+    color:var(--black); background:var(--gold); padding:12px 24px;
+    text-decoration:none; transition:background .3s;
+  }
+  .nav-cta:hover { background:var(--gold-light); }
+
+  /* HERO MINI */
+  .page-hero {
+    padding: 160px 60px 80px;
+    border-bottom: 1px solid rgba(201,169,110,.1);
+    position: relative;
+    overflow: hidden;
+  }
+  .page-hero::before {
+    content: '法'; position: absolute; right: 6%; top: 50%; transform: translateY(-50%);
+    font-family: 'Noto Serif JP', serif; font-size: clamp(120px, 18vw, 260px); font-weight: 200;
+    color: transparent; -webkit-text-stroke: 1px rgba(201,169,110,.08);
+    line-height: 1; user-select: none;
+  }
+  .section-label {
+    font-size:9.5px; letter-spacing:.4em; text-transform:uppercase;
+    color:var(--gold); margin-bottom:24px;
+    display:flex; align-items:center; gap:16px;
+  }
+  .section-label::before { content:''; width:24px; height:1px; background:var(--gold); }
+  .page-hero h1 {
+    font-family:'Cormorant Garamond',serif; font-size:clamp(42px,6vw,80px);
+    font-weight:300; line-height:1; color:var(--white); letter-spacing:-.01em;
+  }
+  .page-hero h1 em { font-style:italic; color:var(--gold-light); }
+
+  /* CONTENT */
+  .legal-content {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 100px 60px 120px;
+  }
+  .legal-block {
+    margin-bottom: 64px;
+    padding-bottom: 64px;
+    border-bottom: 1px solid rgba(201,169,110,.1);
+  }
+  .legal-block:last-child {
+    border-bottom: none;
+    margin-bottom: 0;
+  }
+  .legal-block h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.5vw, 30px);
+    font-weight: 400; color: var(--white);
+    margin-bottom: 24px; line-height: 1.2;
+    letter-spacing: .02em;
+  }
+  .legal-block h2 em { font-style: italic; color: var(--gold-light); }
+  .legal-block p {
+    font-size: 13.5px; line-height: 2;
+    color: var(--cream-dim); margin-bottom: 16px;
+  }
+  .legal-block p:last-child { margin-bottom: 0; }
+  .legal-block strong { color: var(--cream); font-weight: 400; }
+
+  .legal-data {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 3px;
+    margin-top: 32px;
+  }
+  .legal-data-item {
+    background: var(--surface);
+    padding: 24px 28px;
+  }
+  .legal-data-label {
+    font-size: 9px; letter-spacing: .35em; text-transform: uppercase;
+    color: var(--gold-muted); margin-bottom: 8px;
+  }
+  .legal-data-val {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 17px; color: var(--white); font-weight: 400;
+  }
+
+  /* FOOTER */
+  footer {
+    background:var(--black); padding:56px 60px;
+    border-top:1px solid rgba(201,169,110,.1);
+    display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:24px;
+  }
+  .footer-logo { font-family:'Cormorant Garamond',serif; font-size:26px; font-weight:300; color:var(--white); letter-spacing:.1em; }
+  .footer-logo span { display:block; font-family:'Noto Serif JP',serif; font-size:10px; font-weight:200; letter-spacing:.4em; color:var(--gold-muted); margin-top:4px; text-transform:uppercase; }
+  .footer-links { display:flex; gap:28px; list-style:none; }
+  .footer-links a { font-size:10px; letter-spacing:.2em; text-transform:uppercase; color:var(--cream-dim); text-decoration:none; transition:color .3s; }
+  .footer-links a:hover { color:var(--gold); }
+  .footer-copy { font-size:10px; color:var(--gold-muted); letter-spacing:.1em; }
+
+  /* MOBILE */
+  .hamburger {
+    display: none; flex-direction: column; justify-content: center; align-items: center;
+    width: 40px; height: 40px; gap: 5px; cursor: pointer;
+    background: none; border: none; padding: 0; z-index: 600;
+  }
+  .hamburger span { display: block; width: 24px; height: 1px; background: var(--gold); transition: transform .3s, opacity .3s, width .3s; transform-origin: center; }
+  .hamburger.open span:nth-child(1) { transform: translateY(6px) rotate(45deg); }
+  .hamburger.open span:nth-child(2) { opacity: 0; width: 0; }
+  .hamburger.open span:nth-child(3) { transform: translateY(-6px) rotate(-45deg); }
+  .mobile-menu {
+    display: none; position: fixed; inset: 0; z-index: 499;
+    background: rgba(10,8,6,.97); backdrop-filter: blur(16px);
+    flex-direction: column; align-items: center; justify-content: center; gap: 0;
+    opacity: 0; pointer-events: none; transition: opacity .4s ease;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a {
+    font-family: 'Cormorant Garamond', serif; font-size: clamp(28px, 8vw, 44px);
+    font-weight: 300; letter-spacing: .05em; color: var(--cream-dim);
+    text-decoration: none; padding: 16px 40px; transition: color .3s;
+    border-bottom: 1px solid rgba(201,169,110,.08); width: 100%; text-align: center;
+  }
+  .mobile-menu a:last-child { border-bottom: none; }
+  .mobile-menu a:hover { color: var(--gold-light); }
+  .mobile-menu .mobile-cta {
+    margin-top: 32px; font-family: 'Montserrat', sans-serif;
+    font-size: 11px; letter-spacing: .25em; text-transform: uppercase;
+    color: var(--black); background: var(--gold);
+    padding: 18px 48px; border-bottom: none; width: auto;
+  }
+
+  @media(max-width:1024px){
+    nav { padding: 20px 24px; }
+    .nav-links, .nav-cta { display: none; }
+    .hamburger { display: flex; }
+    .mobile-menu { display: flex; }
+    .page-hero { padding: 120px 24px 60px; }
+    .legal-content { padding: 60px 24px 80px; }
+    .legal-data { grid-template-columns: 1fr; }
+    footer { padding: 40px 24px; flex-direction: column; align-items: flex-start; }
+    .footer-links { flex-wrap: wrap; gap: 16px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="navbar">
+  <a href="index.html" class="nav-logo">
+    とっとり
+    <span>TOTTORI</span>
+  </a>
+  <ul class="nav-links">
+    <li><a href="index.html#about">El Restaurante</a></li>
+    <li><a href="carta.html">Carta</a></li>
+    <li><a href="menu.html">Menú</a></li>
+    <li><a href="avisolegal.html">Aviso Legal</a></li>
+  </ul>
+  <button class="hamburger" id="hamburger" aria-label="Menú">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<div class="mobile-menu" id="mobileMenu">
+  <a href="index.html#about" onclick="closeMobile()">El Restaurante</a>
+  <a href="carta.html" onclick="closeMobile()">Carta</a>
+  <a href="menu.html" onclick="closeMobile()">Menú</a>
+  <a href="tel:936388770" class="mobile-cta" onclick="closeMobile()">Llamar ahora</a>
+</div>
+
+<!-- HERO -->
+<div class="page-hero">
+  <div class="section-label">Legal</div>
+  <h1>Aviso <em>Legal</em></h1>
+  <a href="index.html" style="display:inline-flex;align-items:center;gap:10px;margin-top:36px;font-size:10.5px;letter-spacing:.25em;text-transform:uppercase;color:var(--black);background:var(--gold);padding:16px 36px;text-decoration:none;transition:background .3s;" onmouseover="this.style.background='var(--gold-light)'" onmouseout="this.style.background='var(--gold)'">
+    ← Volver al inicio
+  </a>
+</div>
+
+<!-- CONTENT -->
+<div class="legal-content">
+
+  <div class="legal-block">
+    <h2>Datos del <em>titular</em></h2>
+    <p>En cumplimiento con el deber de información recogido en la Ley 34/2002, de 11 de julio, de Servicios de la Sociedad de la Información y del Comercio Electrónico, a continuación se reflejan los datos de identificación del titular del sitio web.</p>
+    <div class="legal-data">
+      <div class="legal-data-item">
+        <div class="legal-data-label">Razón social</div>
+        <div class="legal-data-val">H&J SUSHI YA S.L.</div>
+      </div>
+      <div class="legal-data-item">
+        <div class="legal-data-label">CIF / NIF</div>
+        <div class="legal-data-val">B66272246</div>
+      </div>
+      <div class="legal-data-item">
+        <div class="legal-data-label">Domicilio</div>
+        <div class="legal-data-val">Calle Sant Pere nº37, Gavà, Barcelona</div>
+      </div>
+      <div class="legal-data-item">
+        <div class="legal-data-label">Dominio</div>
+        <div class="legal-data-val">www.tottorigava.com</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="legal-block">
+    <h2>Condiciones de <em>uso</em></h2>
+    <p>Las presentes condiciones de uso regulan el acceso a esta web por parte de los clientes de TOTTORI y demás usuarios de internet. Por el mero uso de esta web, el usuario manifiesta su aceptación sin reservas de las presentes condiciones de uso.</p>
+    <p>TOTTORI se reserva el derecho unilateral de modificar las presentes condiciones de acceso a la web, así como los contenidos en ella incluidos. El contenido de esta web es de carácter general y tiene una finalidad y efectos exclusivamente informativos.</p>
+    <p>La finalidad de la web es dar a conocer el negocio de restauración y servir como herramienta de contacto e informativa.</p>
+  </div>
+
+  <div class="legal-block">
+    <h2>Responsabilidad y <em>disponibilidad</em></h2>
+    <p>El usuario exonera a TOTTORI de cualquier responsabilidad que pudiera derivarse de las interrupciones de disponibilidad de la página web, ya sea por mal funcionamiento del servidor web o de aplicaciones, de las infraestructuras de comunicaciones, o del software y hardware utilizados para la navegación.</p>
+    <p>En el caso de incluir enlaces a otras páginas web, TOTTORI declina cualquier responsabilidad relacionada con el acceso y utilización de dichos enlaces.</p>
+  </div>
+
+  <div class="legal-block">
+    <h2>Propiedad <em>intelectual</em></h2>
+    <p>La totalidad de esta web se encuentra protegida por las leyes sobre Propiedad Intelectual e Industrial. Salvo que se indique lo contrario, los derechos de propiedad intelectual sobre estos contenidos corresponden en exclusiva a TOTTORI.</p>
+    <p>El usuario reconoce que el uso de los contenidos queda estrictamente limitado a finalidades personales del propio usuario y que la reproducción, distribución, comunicación o transformación no expresamente autorizada de tales obras constituye una infracción de los derechos de propiedad intelectual.</p>
+    <p>Asimismo, el usuario se abstendrá de emplear los contenidos y, en particular, la información de cualquier clase obtenida a través de la web para remitir publicidad, comunicaciones con fines de venta directa o con cualquier otra clase de finalidad comercial, mensajes no solicitados dirigidos a una pluralidad de personas con independencia de su finalidad. También se abstendrá de comercializar o divulgar de cualquier modo dicha información.</p>
+  </div>
+
+  <div class="legal-block">
+    <h2>Protección de <em>datos</em></h2>
+    <p>La utilización de esta web y de sus formularios requiere la aceptación del tratamiento de los datos del usuario bajo la responsabilidad de TOTTORI, para finalidades que incluyen la provisión de la web, la recopilación de datos de acceso y el envío de información comercial por vía electrónica, en determinados casos y siempre bajo consentimiento del receptor.</p>
+    <p>Para ejercer los derechos de acceso, rectificación, supresión, oposición, y otros derechos de protección de datos, puede contactar con nosotros a través de los siguientes medios:</p>
+    <p>· Por teléfono al número <strong><a href="tel:936388770" style="color:var(--gold-light);text-decoration:none;">93 638 87 70</a></strong><br>
+    · Por correo electrónico a <strong><a href="mailto:tottorigava@gmail.com" style="color:var(--gold-light);text-decoration:none;">tottorigava@gmail.com</a></strong><br>
+    · Por escrito dirigiéndose a: <strong>TOTTORI, Calle Sant Pere nº37, Gavà, Barcelona.</strong></p>
+  </div>
+
+  <div class="legal-block">
+    <h2>Legislación <em>aplicable</em></h2>
+    <p>El presente Aviso Legal, así como las relaciones entre TOTTORI y los usuarios, se regirán por la normativa española vigente y cualquier controversia se someterá a los Juzgados y Tribunales de GAVÀ, excepto en el caso de consumidores y usuarios que se aplicará el fuero imperativo de los juzgados que correspondan a su domicilio.</p>
+  </div>
+
+</div>
+
+<footer>
+  <div class="footer-logo">TOTTORI <span>Restaurant japonès · Gavà</span></div>
+  <ul class="footer-links">
+    <li><a href="index.html#about">El Restaurante</a></li>
+    <li><a href="carta.html">Carta</a></li>
+    <li><a href="menu.html">Menú</a></li>
+    <li><a href="avisolegal.html">Aviso Legal</a></li>
+  </ul>
+  <div class="footer-copy">© 2026 Tottori Gavà · Barcelona</div>
+</footer>
+
+<script>
+  const hamburger = document.getElementById('hamburger');
+  const mobileMenu = document.getElementById('mobileMenu');
+  hamburger.addEventListener('click', () => {
+    const isOpen = mobileMenu.classList.toggle('open');
+    hamburger.classList.toggle('open', isOpen);
+    document.body.style.overflow = isOpen ? 'hidden' : '';
+  });
+  function closeMobile() {
+    mobileMenu.classList.remove('open');
+    hamburger.classList.remove('open');
+    document.body.style.overflow = '';
+  }
+</script>
+</body>
+</html>
